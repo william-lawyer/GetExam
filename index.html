@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Video Auto Play with Stories</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="video-container">
+        <video id="video" autoplay muted>
+            <source src="video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <div id="app">
+        <div class="learning-module">
+            <div class="stories-preview" id="storiesPreview"></div> <!-- Переместили сюда -->
+            <div class="greeting-text">Привет!</div>
+            <div class="main-question">Что будем учить?</div>
+            <input type="text" class="search-input" id="mainSearch" placeholder="Поиск...">
+            <div class="subjects-container">
+                <button class="subject-btn">Обществознание</button>
+                <button class="subject-btn">Биология</button>
+                <button class="subject-btn">Математика</button>
+                <button class="subject-btn">Русский язык</button>
+                <button class="subject-btn">История</button>
+                <button class="subject-btn">Химия</button>
+                <button class="subject-btn">Физика</button>
+                <button class="subject-btn">Английский язык</button>
+                <button class="subject-btn">Информатика</button>
+                <button class="subject-btn">География</button>
+                <button class="subject-btn">Литература</button>
+            </div>
+            <div class="ad-banner">
+                <img src="QtrEJ6z.png" alt="Реклама" class="ad-image">
+            </div>
+            <div class="articles-module">
+                <div class="articles-title">Подборка статей</div>
+                <div class="articles-subtitle">Специальные подборки которые упростят вам обучение</div>
+                <div class="class-buttons">
+                    <button class="class-btn active" data-class="11">11 класс</button>
+                    <button class="class-btn" data-class="10">10 класс</button>
+                    <button class="class-btn" data-class="9">9 класс</button>
+                    <button class="class-btn" data-class="exam">ОГЭ и ЕГЭ</button>
+                </div>
+                <div class="articles-cards" id="articlesCards">
+                    <!-- Карточки будут добавляться через JavaScript -->
+                </div>
+            </div>
+        </div>
+        <div class="search-screen" id="searchScreen" style="display: none;">
+            <div class="search-header">
+                <input type="text" class="search-input" id="searchInput" placeholder="Поиск...">
+                <button class="cancel-btn" id="cancelSearch">Отмена</button>
+            </div>
+            <div class="search-results" id="searchResults"></div>
+        </div>
+    </div>
+    <div class="stories-container" id="storiesContainer" style="display: none;"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
