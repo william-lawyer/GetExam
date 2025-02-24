@@ -38,14 +38,17 @@ html, body {
   display: flex;
   gap: 15px;
   overflow-x: auto;
+  overflow-y: hidden;
   background: transparent;
   -webkit-overflow-scrolling: touch;
   white-space: nowrap;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  margin-top: 20px; /* Добавлен отступ сверху */
   margin-bottom: 20px;
   animation: fadeIn 0.5s ease forwards;
-  min-height: 110px;
+  min-height: 130px;
+  max-height: 130px;
   box-sizing: border-box;
   margin-left: -5px;
 }
@@ -55,8 +58,8 @@ html, body {
 }
 
 .story-preview {
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   border-radius: 12px;
   object-fit: cover;
   cursor: pointer;
@@ -465,13 +468,15 @@ video {
   .stories-preview {
     padding: 10px 10px 10px 5px;
     gap: 10px;
-    min-height: 90px;
+    min-height: 110px;
+    max-height: 110px;
     margin-left: -5px;
+    margin-top: 15px; /* Уменьшен отступ сверху для мобильных */
   }
 
   .story-preview {
-    width: 70px;
-    height: 70px;
+    width: 85px;
+    height: 85px;
   }
 
   .learning-module {
@@ -566,7 +571,9 @@ video {
   .stories-preview {
     padding: 10px 10px 10px 5px;
     margin-bottom: 20px;
-    min-height: 90px;
+    min-height: 110px;
+    max-height: 110px;
     margin-left: -5px;
+    margin-top: 15px; /* Уменьшен отступ сверху для низких экранов */
   }
 }
