@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Video Auto Play with Stories</title>
+    <title>Learning App</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -13,7 +13,58 @@
             Your browser does not support the video tag.
         </video>
     </div>
-    <div id="app">
+
+    <div class="container" id="auth-container" style="display: none;">
+        <!-- Экран входа -->
+        <div id="login-screen" class="screen">
+            <div class="input-group">
+                <input type="text" id="login-username" placeholder="Логин">
+                <span class="error" id="login-username-error"></span>
+            </div>
+            <div class="input-group">
+                <input type="password" id="login-password" placeholder="Пароль">
+                <span class="error" id="login-password-error"></span>
+            </div>
+            <button onclick="handleLogin()">Войти</button>
+            <button class="secondary" onclick="showRegister()">Регистрация</button>
+        </div>
+
+        <!-- Экран регистрации -->
+        <div id="register-screen" class="screen">
+            <div class="input-group">
+                <input type="text" id="reg-name" placeholder="Имя">
+                <span class="error" id="reg-name-error"></span>
+            </div>
+            <div class="input-group">
+                <input type="text" id="reg-username" placeholder="Логин">
+                <span class="error" id="reg-username-error"></span>
+            </div>
+            <div class="input-group">
+                <input type="email" id="reg-email" placeholder="Почта">
+                <span class="error" id="reg-email-error"></span>
+            </div>
+            <div class="input-group">
+                <input type="password" id="reg-password" placeholder="Пароль">
+                <span class="error" id="reg-password-error"></span>
+            </div>
+            <button onclick="handleRegister()">Создать</button>
+            <button class="secondary back-btn" onclick="goBack('login')">Назад</button>
+        </div>
+
+        <!-- Экран ввода кода -->
+        <div id="code-screen" class="screen">
+            <h3>Введите код подтверждения</h3>
+            <p>Мы отправили код на вашу почту</p>
+            <div class="input-group">
+                <input type="text" id="reg-code" placeholder="Код">
+                <span class="error" id="reg-code-error"></span>
+            </div>
+            <button onclick="verifyCode()">Подтвердить</button>
+            <button class="secondary back-btn" onclick="goBack('register')">Назад</button>
+        </div>
+    </div>
+
+    <div id="app" style="display: none;">
         <div class="learning-module">
             <div class="stories-preview" id="storiesPreview"></div>
             <div class="greeting-text">Привет!</div>
@@ -44,9 +95,7 @@
                     <button class="class-btn" data-class="9">9 класс</button>
                     <button class="class-btn" data-class="exam">ОГЭ и ЕГЭ</button>
                 </div>
-                <div class="articles-cards" id="articlesCards">
-                    <!-- Карточки будут добавляться через JavaScript -->
-                </div>
+                <div class="articles-cards" id="articlesCards"></div>
             </div>
         </div>
         <div class="search-screen" id="searchScreen" style="display: none;">
