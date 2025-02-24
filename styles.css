@@ -24,6 +24,7 @@ html, body {
 }
 
 #app {
+  margin-top: 50px;
   z-index: 0;
   display: none;
   background-color: #000;
@@ -44,7 +45,7 @@ html, body {
   white-space: nowrap;
   -ms-overflow-style: none;
   scrollbar-width: none;
-  margin-top: 20px; /* Добавлен отступ сверху */
+  margin-top: 50px; /* Добавлен отступ сверху */
   margin-bottom: 20px;
   animation: fadeIn 0.5s ease forwards;
   min-height: 130px;
@@ -449,6 +450,7 @@ video {
   border-radius: 10px;
   white-space: nowrap;
   animation: scaleIn 0.4s ease forwards;
+  margin-bottom: 16px;
 }
 
 .cancel-btn:hover {
