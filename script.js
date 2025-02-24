@@ -6,34 +6,42 @@ document.addEventListener("DOMContentLoaded", function() {
   const storiesContainer = document.getElementById("storiesContainer");
   const articlesCards = document.getElementById("articlesCards");
 
+  function startApp() {
+    videoContainer.style.display = 'none';
+    app.style.display = 'flex';
+    initializeStoriesPreview();
+    initializeArticles();
+  }
+
   video.addEventListener('loadedmetadata', function() {
     console.log("Video metadata loaded");
     video.play().then(() => {
       console.log("Video started playing");
     }).catch(error => {
       console.error("Error playing video:", error);
-      videoContainer.style.display = 'none';
-      app.style.display = 'flex';
-      initializeStoriesPreview();
-      initializeArticles();
+      startApp();
     });
   });
 
   video.addEventListener('ended', function() {
     console.log("Video ended");
-    videoContainer.style.display = 'none';
-    app.style.display = 'flex';
-    initializeStoriesPreview();
-    initializeArticles();
+    startApp();
   });
+
+  // Добавляем обработчик клика для запуска видео на iPhone
+  document.body.addEventListener('click', function attemptPlay() {
+    video.play().then(() => {
+      console.log("Video started playing after click");
+      document.body.removeEventListener('click', attemptPlay);
+    }).catch(error => {
+      console.error("Error playing video on click:", error);
+    });
+  }, { once: true });
 
   setTimeout(() => {
     if (video.readyState < 4) {
       console.warn("Video not loaded in time, skipping to app");
-      videoContainer.style.display = 'none';
-      app.style.display = 'flex';
-      initializeStoriesPreview();
-      initializeArticles();
+      startApp();
     }
   }, 5000);
 
