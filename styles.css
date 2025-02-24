@@ -24,7 +24,7 @@ html, body {
 }
 
 #app {
-  margin-top: 75px;
+  margin-top: 80px;
   z-index: 0;
   display: none;
   background-color: #000;
