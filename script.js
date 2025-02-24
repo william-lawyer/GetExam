@@ -28,7 +28,6 @@ document.addEventListener("DOMContentLoaded", function() {
     startApp();
   });
 
-  // Добавляем обработчик клика для запуска видео на iPhone
   document.body.addEventListener('click', function attemptPlay() {
     video.play().then(() => {
       console.log("Video started playing after click");
@@ -47,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   const stories = [
     { type: 'image', url: 'story1.jpg', preview: 'story1.jpg', duration: 5000, text: 'Welcome to our app!', viewed: false },
-    { type: 'video', url: 'story1.jpg', preview: 'story1.jpg', duration: 10000, text: 'Watch this cool video', viewed: false },
+    { type: 'video', url: 'video.mp4', preview: 'story1.jpg', duration: 10000, text: 'Watch this cool video', viewed: false },
     { type: 'image', url: 'story1.jpg', preview: 'story1.jpg', duration: 7000, text: 'Special offer just for you!', viewed: false },
     { type: 'image', url: 'story1.jpg', preview: 'story1.jpg', duration: 5000, text: 'Story 4', viewed: false },
     { type: 'image', url: 'story1.jpg', preview: 'story1.jpg', duration: 5000, text: 'Story 5', viewed: false },
