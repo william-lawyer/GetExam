@@ -480,6 +480,7 @@ video {
   top: 0;
   left: 0;
   z-index: 2;
+  background-color: #000; /* Добавлен фон для единообразия */
 }
 
 .auth-screen {
@@ -488,6 +489,7 @@ video {
   transform: translateX(100%);
   transition: opacity 0.3s ease, transform 0.3s ease;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .auth-screen.active {
@@ -499,6 +501,7 @@ video {
 .auth-input-group {
   margin-bottom: 20px;
   position: relative;
+  width: 100%;
 }
 
 .auth-input-group input {
@@ -511,6 +514,7 @@ video {
   font-size: 14px;
   outline: none;
   transition: border-color 0.3s;
+  box-sizing: border-box;
 }
 
 .auth-input-group input:focus {
@@ -541,6 +545,7 @@ video {
   cursor: pointer;
   margin-top: 12px;
   transition: background 0.3s;
+  box-sizing: border-box;
 }
 
 .auth-container button:hover {
@@ -575,7 +580,9 @@ button.auth-secondary:hover {
   margin-bottom: 20px;
 }
 
+/* Адаптивные стили для телефонов */
 @media (max-width: 480px) {
+  /* Общие стили для приложения */
   .stories-preview {
     padding: 10px 10px 10px 5px;
     gap: 10px;
@@ -591,7 +598,7 @@ button.auth-secondary:hover {
   }
 
   .learning-module {
-    padding: 0 20px 20px;
+    padding: 0 15px 15px; /* Уменьшаем отступы */
     max-height: 100vh;
   }
 
@@ -600,81 +607,132 @@ button.auth-secondary:hover {
   }
 
   .main-question {
-    font-size: 24px;
+    font-size: 20px; /* Уменьшаем заголовок */
   }
 
   .search-input {
-    padding: 10px 10px 10px 35px;
-    font-size: 16px;
-    background-size: 18px;
-    background-position: 8px center;
+    padding: 8px 8px 8px 30px; /* Уменьшаем отступы */
+    font-size: 14px; /* Уменьшаем шрифт */
+    background-size: 16px; /* Уменьшаем иконку поиска */
+    background-position: 6px center;
   }
 
   .subjects-container {
-    gap: 10px;
+    gap: 8px; /* Уменьшаем расстояние между кнопками */
   }
 
   .subject-btn {
-    padding: 8px 14px;
-    font-size: 14px;
+    padding: 6px 12px; /* Уменьшаем кнопки */
+    font-size: 12px; /* Уменьшаем шрифт */
   }
 
   .ad-image {
-    height: 120px;
+    height: 100px; /* Уменьшаем высоту баннера */
   }
 
   .articles-title {
-    font-size: 24px;
+    font-size: 20px; /* Уменьшаем заголовок */
   }
 
   .articles-subtitle {
-    font-size: 14px;
+    font-size: 12px; /* Уменьшаем подзаголовок */
   }
 
   .class-btn {
-    padding: 6px 12px;
-    font-size: 14px;
+    padding: 5px 10px; /* Уменьшаем кнопки */
+    font-size: 12px; /* Уменьшаем шрифт */
   }
 
   .article-card {
-    width: 90%;
-    height: 130px;
-    padding: 15px;
+    width: 100%; /* Растягиваем карточки на всю ширину */
+    height: 120px; /* Уменьшаем высоту */
+    padding: 10px; /* Уменьшаем внутренние отступы */
   }
 
   .article-card-title {
-    font-size: 18px;
+    font-size: 16px; /* Уменьшаем шрифт */
   }
 
   .article-card-subtitle {
-    font-size: 11px;
+    font-size: 10px; /* Уменьшаем шрифт */
   }
 
   .search-header .search-input {
-    width: calc(100% - 90px);
+    width: calc(100% - 70px); /* Уменьшаем ширину для кнопки "Отмена" */
   }
 
   .cancel-btn {
-    font-size: 16px;
-    padding: 8px 12px;
+    font-size: 14px; /* Уменьшаем шрифт */
+    padding: 6px 10px; /* Уменьшаем отступы */
   }
 
   .story-content {
-    font-size: 18px;
-    bottom: 20px;
-    left: 20px;
-    right: 20px;
+    font-size: 16px; /* Уменьшаем шрифт */
+    bottom: 15px; /* Уменьшаем отступ снизу */
+    left: 15px;
+    right: 15px;
   }
 
   .close-btn {
-    top: 120px;
-    right: 20px;
-    font-size: 26px;
-    padding: 6px 12px;
+    top: 110px; /* Сдвигаем кнопку ближе к верху */
+    right: 15px; /* Увеличиваем отступ справа */
+    font-size: 24px; /* Уменьшаем размер */
+    padding: 5px 10px; /* Уменьшаем отступы */
   }
 
   .progress-bar {
-    top: 100px;
+    top: 90px; /* Сдвигаем прогресс-бар выше */
+  }
+
+  /* Адаптивные стили для окна авторизации */
+  .auth-container {
+    padding: 15px; /* Уменьшаем внешние отступы */
+    max-width: 90%; /* Устанавливаем максимальную ширину относительно экрана */
+    margin: 0 auto; /* Центрируем контейнер */
+  }
+
+  .auth-screen {
+    padding: 10px; /* Уменьшаем внутренние отступы */
+    width: 100%; /* Убедимся, что экран занимает доступную ширину */
+  }
+
+  .auth-input-group {
+    margin-bottom: 12px; /* Уменьшаем расстояние между полями */
+    width: 100%; /* Устанавливаем ширину 100% */
+  }
+
+  .auth-input-group input {
+    font-size: 12px; /* Уменьшаем шрифт полей ввода */
+    padding: 6px 8px; /* Уменьшаем внутренние отступы */
+    width: 100%; /* Устанавливаем ширину 100% */
+    box-sizing: border-box; /* Учитываем padding в ширине */
+  }
+
+  .auth-error {
+    font-size: 9px; /* Уменьшаем шрифт ошибок */
+    margin-top: 2px; /* Уменьшаем отступ сверху */
+  }
+
+  .auth-container button {
+    padding: 6px; /* Уменьшаем внутренние отступы кнопок */
+    font-size: 12px; /* Уменьшаем шрифт кнопок */
+    margin-top: 8px; /* Уменьшаем отступ сверху */
+    width: 100%; /* Устанавливаем ширину 100% */
+    box-sizing: border-box; /* Учитываем padding в ширине */
+  }
+
+  .auth-back-btn {
+    font-size: 10px; /* Уменьшаем шрифт кнопки "Назад" */
+    margin-top: 6px; /* Уменьшаем отступ сверху */
+  }
+
+  #auth-code-screen h3 {
+    font-size: 14px; /* Уменьшаем заголовок */
+  }
+
+  #auth-code-screen p {
+    font-size: 10px; /* Уменьшаем текст */
+    margin-bottom: 12px; /* Уменьшаем отступ снизу */
   }
 }
 
@@ -691,4 +749,4 @@ button.auth-secondary:hover {
     margin-left: -5px;
     margin-top: 15px;
   }
-} 
+}
