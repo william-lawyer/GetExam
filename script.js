@@ -82,6 +82,22 @@ const articlesData = {
     ]
 };
 
+document.addEventListener("DOMContentLoaded", function() {
+  // Очищаем локальное хранилище при каждом запуске
+  localStorage.clear();
+  console.log("LocalStorage cleared on page load");
+
+  video.addEventListener('loadedmetadata', function() {
+      console.log("Video metadata loaded");
+      video.play().then(() => {
+          console.log("Video started playing");
+      }).catch(error => {
+          console.error("Error playing video:", error);
+          checkFirstLaunch();
+      });
+  });
+});
+
 // Проверка первого запуска и управление видимостью
 function checkFirstLaunch() {
     if (authStarted) return; // Если авторизация уже началась, не выполняем
@@ -340,28 +356,38 @@ window.verifyCode = async function() {
 
 // Обработка входа
 window.handleLogin = function() {
-    const username = inputs.loginUsername.value.trim();
-    const password = inputs.loginPassword.value.trim();
+  const username = inputs.loginUsername.value.trim();
+  const password = inputs.loginPassword.value.trim();
 
-    if (!username) errors.loginUsername.textContent = 'Это обязательное поле';
-    if (!password) errors.loginPassword.textContent = 'Это обязательное поле';
+  // Проверка на пустые поля
+  if (!username) errors.loginUsername.textContent = 'Это обязательное поле';
+  if (!password) errors.loginPassword.textContent = 'Это обязательное поле';
 
-    const usernameValid = validateUsername(inputs.loginUsername, errors.loginUsername);
-    const passwordValid = validatePassword(inputs.loginPassword, errors.loginPassword);
+  const usernameValid = validateUsername(inputs.loginUsername, errors.loginUsername);
+  const passwordValid = validatePassword(inputs.loginPassword, errors.loginPassword);
 
-    if (!username || !password || !usernameValid || !passwordValid) return;
+  if (!username || !password || !usernameValid || !passwordValid) return;
 
-    const storedUsername = localStorage.getItem('username');
-    const storedPassword = localStorage.getItem('password');
+  // Проверка на admin/admin
+  if (username === 'admin' && password === 'admin') {
+      console.log("Admin login detected, starting app");
+      localStorage.setItem('loggedIn', 'true'); // Устанавливаем флаг входа
+      startApp();
+      return; // Выходим из функции после успешного входа
+  }
 
-    if (username === storedUsername && password === storedPassword) {
-        console.log("Login successful");
-        localStorage.setItem('loggedIn', 'true');
-        startApp();
-    } else {
-        console.error("Login failed: incorrect credentials");
-        errors.loginPassword.textContent = 'Неверный логин или пароль';
-    }
+  // Обычная проверка через localStorage
+  const storedUsername = localStorage.getItem('username');
+  const storedPassword = localStorage.getItem('password');
+
+  if (username === storedUsername && password === storedPassword) {
+      console.log("Login successful");
+      localStorage.setItem('loggedIn', 'true');
+      startApp();
+  } else {
+      console.error("Login failed: incorrect credentials");
+      errors.loginPassword.textContent = 'Неверный логин или пароль';
+  }
 };
 
 // Обработка регистрации
@@ -421,43 +447,50 @@ function openStories() {
 }
 
 function createStories() {
-    storiesContainer.innerHTML = `
-        <div class="progress-bar" id="progressBar"></div>
-        <div class="controls">
-            <button class="control-area" id="prevStory"></button>
-            <button class="control-area" id="nextStory"></button>
-        </div>
-        <button class="close-btn" id="closeStories">×</button>
-    `;
-    const progressBar = document.getElementById("progressBar");
+  storiesContainer.innerHTML = `
+      <div class="progress-bar" id="progressBar"></div>
+      <div class="controls">
+          <button class="control-area" id="prevStory"></button>
+          <button class="control-area" id="nextStory"></button>
+      </div>
+      <button class="close-btn" id="closeStories">×</button>
+  `;
+  const progressBar = document.getElementById("progressBar");
 
-    stories.forEach((story) => {
-        const element = story.type === 'image' 
-            ? document.createElement('img') 
-            : document.createElement('video');
+  stories.forEach((story) => {
+      const element = story.type === 'image' 
+          ? document.createElement('img') 
+          : document.createElement('video');
 
-        element.src = story.url;
-        element.classList.add('story');
-        if (story.type === 'video') {
-            element.muted = true;
-            element.loop = false;
-        }
-        storiesContainer.appendChild(element);
+      element.src = story.url;
+      element.classList.add('story');
+      if (story.type === 'video') {
+          element.muted = true;
+          element.loop = false;
+      }
+      storiesContainer.appendChild(element);
 
-        const textElement = document.createElement('div');
-        textElement.classList.add('story-content');
-        textElement.textContent = story.text;
-        element.after(textElement);
+      const textElement = document.createElement('div');
+      textElement.classList.add('story-content');
+      textElement.textContent = story.text;
+      element.after(textElement);
 
-        const segment = document.createElement('div');
-        segment.classList.add('progress-segment');
-        const fill = document.createElement('div');
-        fill.classList.add('progress-fill');
-        segment.appendChild(fill);
-        progressBar.appendChild(segment);
-    });
+      const segment = document.createElement('div');
+      segment.classList.add('progress-segment');
+      const fill = document.createElement('div');
+      fill.classList.add('progress-fill');
+      segment.appendChild(fill);
+      progressBar.appendChild(segment);
+  });
 
-    bindStoryControls();
+  // Явное позиционирование кнопки после создания
+  const closeBtn = document.getElementById('closeStories');
+  if (closeBtn) {
+      closeBtn.style.bottom = '20px';
+      closeBtn.style.right = '10px';
+  }
+
+  bindStoryControls();
 }
 
 function showStory(index) {
