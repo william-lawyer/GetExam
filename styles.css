@@ -292,8 +292,8 @@ video {
 
 .close-btn {
   position: absolute;
-  bottom: 20px !important; /* Принудительное применение */
-  right: 10px !important; /* Принудительное применение */
+  top: 20px; /* Фиксируем отступ сверху */
+  right: 25px; /* Фиксируем отступ справа */
   background: rgba(255, 255, 255, 0.2);
   border: none;
   color: #fff;
@@ -313,6 +313,7 @@ video {
   justify-content: center;
   align-items: center;
   padding: 0;
+  z-index: 11; /* Убеждаемся, что кнопка поверх контента */
 }
 
 .learning-module {
@@ -742,7 +743,7 @@ video {
 .auth-container {
   width: 100%;
   max-width: 400px; /* Увеличена максимальная ширина */
-  padding: 40px; /* Увеличены отступы */
+  padding: 40px; /* Увеличены  */
   min-height: 100vh;
   display: -webkit-flex;
   display: -moz-flex;
@@ -975,20 +976,11 @@ button.auth-secondary:hover {
   }
 
   .close-btn {
-    bottom: 670px !important; /* Перемещаем кнопку вниз на мобильных устройствах */
-    right: 20px !important;
-    font-size: 24px; /* Сохраняем размер крестика */
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+    top: 140px; /* Небольшая корректировка для мобильных */
+    margin-right: 12px;
+    font-size: 20px; /* Уменьшаем размер для мобильных */
+    width: 28px; /* Уменьшаем размер кнопки */
+    height: 28px;
   }
 
   .progress-bar {
