@@ -111,7 +111,7 @@ video {
 
 .progress-bar {
   position: absolute;
-  top: 105px; /* Смещено с 85px на 105px ниже */
+  top: 105px;
   width: 100%;
   display: flex;
   gap: 8px;
@@ -179,7 +179,7 @@ video {
 
 .close-btn {
   position: absolute;
-  top: 125px; /* Смещено с 95px на 125px ниже, дальше от прогресс-бара */
+  top: 125px;
   right: 2px;
   background: rgba(255, 255, 255, 0.2);
   border: none;
@@ -467,6 +467,114 @@ video {
   scroll-behavior: smooth;
 }
 
+/* Стили для авторизации */
+.auth-container {
+  width: 100%;
+  max-width: 320px;
+  padding: 33px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+.auth-screen {
+  display: none;
+  opacity: 0;
+  transform: translateX(100%);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  width: 100%;
+}
+
+.auth-screen.active {
+  display: block;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.auth-input-group {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.auth-input-group input {
+  width: 100%;
+  padding: 8px 0;
+  border: none;
+  border-bottom: 1px solid #666;
+  background: transparent;
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.auth-input-group input:focus {
+  border-bottom: 1px solid #fff;
+}
+
+.auth-input-group input::placeholder {
+  color: #888;
+}
+
+.auth-error {
+  display: block;
+  color: #ff5555;
+  font-size: 11px;
+  margin-top: 4px;
+  min-height: 14px;
+}
+
+.auth-container button {
+  width: 100%;
+  padding: 8px;
+  background: #fff;
+  color: #000;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 12px;
+  transition: background 0.3s;
+}
+
+.auth-container button:hover {
+  background: #e0e0e0;
+}
+
+button.auth-secondary {
+  background: transparent;
+  color: #fff;
+  border: 1px solid #666;
+}
+
+button.auth-secondary:hover {
+  border-color: #fff;
+}
+
+.auth-back-btn {
+  margin-top: 10px;
+  font-size: 12px;
+}
+
+#auth-code-screen h3 {
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+#auth-code-screen p {
+  text-align: center;
+  font-size: 12px;
+  color: #888;
+  margin-bottom: 20px;
+}
+
 @media (max-width: 480px) {
   .stories-preview {
     padding: 10px 10px 10px 5px;
@@ -559,14 +667,14 @@ video {
   }
 
   .close-btn {
-    top: 120px; /* Смещено с 90px на 110px ниже, дальше от прогресс-бара */
+    top: 120px;
     right: 20px;
     font-size: 26px;
     padding: 6px 12px;
   }
 
   .progress-bar {
-    top: 100px; /* Смещено с 80px на 100px ниже для мобильных */
+    top: 100px;
   }
 }
 
@@ -583,4 +691,4 @@ video {
     margin-left: -5px;
     margin-top: 15px;
   }
-}
+} 
