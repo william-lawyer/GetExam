@@ -1,4 +1,4 @@
-/* Нормализация стилей для кросс-браузерности */
+
 * {
   margin: 0;
   padding: 0;
@@ -10,11 +10,12 @@
 html, body {
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  overflow-x: hidden; /* Запрещаем горизонтальный скроллинг */
+  overflow-y: auto; /* Разрешаем вертикальный скроллинг */
   background-color: #000;
-  font-family: Arial, Helvetica, sans-serif; /* Добавлены запасные шрифты */
-  -webkit-font-smoothing: antialiased; /* Улучшение шрифтов для Safari */
-  -moz-osx-font-smoothing: grayscale; /* Улучшение шрифтов для Firefox */
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 #video-container, #app {
@@ -59,28 +60,28 @@ html, body {
 
 .stories-preview {
   width: 100%;
-  padding: 20px 20px 20px 15px; /* Увеличены отступы */
+  padding: 20px 20px 20px 15px;
   display: -webkit-flex;
   display: -moz-flex;
   display: -ms-flexbox;
   display: flex;
-  gap: 20px; /* Увеличен зазор */
-  overflow-x: auto;
+  gap: 20px;
+  overflow-x: auto; /* Оставляем горизонтальную прокрутку только здесь */
   overflow-y: hidden;
   background: transparent;
   -webkit-overflow-scrolling: touch;
   white-space: nowrap;
   -ms-overflow-style: none;
   scrollbar-width: none;
-  margin-top: 60px; /* Увеличен отступ сверху */
-  margin-bottom: 30px; /* Увеличен отступ снизу */
+  margin-top: 60px;
+  margin-bottom: 30px;
   animation: fadeIn 0.5s ease forwards;
-  min-height: 150px; /* Увеличена минимальная высота */
-  max-height: 150px; /* Увеличена максимальная высота */
+  min-height: 150px;
+  max-height: 150px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  margin-left: -10px; /* Увеличен отступ слева */
+  margin-left: -10px;
 }
 
 .stories-preview::-webkit-scrollbar {
@@ -109,7 +110,7 @@ html, body {
 
 .stories-container {
   width: 100vw;
-  height: 100vh;
+  height: 100vh; /* Полная высота экрана */
   display: -webkit-flex;
   display: -moz-flex;
   display: -ms-flexbox;
@@ -122,7 +123,7 @@ html, body {
   -moz-justify-content: center;
   -ms-justify-content: center;
   justify-content: center;
-  position: fixed;
+  position: fixed; /* Фиксированное положение для всего экрана */
   top: 0;
   left: 0;
   z-index: 10;
@@ -131,6 +132,10 @@ html, body {
   -webkit-animation: fadeIn 0.3s ease forwards;
   -moz-animation: fadeIn 0.3s ease forwards;
   animation: fadeIn 0.3s ease forwards;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 @-webkit-keyframes fadeIn {
@@ -240,6 +245,10 @@ video {
   -moz-align-items: center;
   -ms-align-items: center;
   align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .control-area {
@@ -255,6 +264,10 @@ video {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .story.active {
@@ -263,31 +276,43 @@ video {
 
 .story-content {
   position: absolute;
-  bottom: 40px; /* Увеличен отступ снизу */
-  left: 40px; /* Увеличен отступ слева */
-  right: 40px; /* Увеличен отступ справа */
+  bottom: 40px;
+  left: 40px;
+  right: 40px;
   text-align: center;
-  font-size: 24px; /* Увеличен шрифт */
+  font-size: 24px;
   -webkit-animation: fadeInUp 0.5s ease forwards;
   -moz-animation: fadeInUp 0.5s ease forwards;
   animation: fadeInUp 0.5s ease forwards;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .close-btn {
   position: absolute;
-  top: 140px; /* Увеличен отступ сверху */
-  right: 10px; /* Увеличен отступ справа */
+  bottom: 20px !important; /* Принудительное применение */
+  right: 10px !important; /* Принудительное применение */
   background: rgba(255, 255, 255, 0.2);
   border: none;
   color: #fff;
-  font-size: 36px; /* Увеличен шрифт */
-  padding: 10px 16px; /* Увеличены отступы */
+  font-size: 24px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   cursor: pointer;
   -webkit-animation: scaleIn 0.4s ease forwards;
   -moz-animation: scaleIn 0.4s ease forwards;
   animation: scaleIn 0.4s ease forwards;
-  max-height: 50px; /* Увеличена максимальная высота */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
 }
 
 .learning-module {
@@ -306,10 +331,11 @@ video {
   -moz-align-items: flex-start;
   -ms-align-items: flex-start;
   align-items: flex-start;
-  padding: 0 30px 30px; /* Увеличены отступы */
+  padding: 0 30px 30px;
   color: #fff;
   z-index: 1;
   overflow-y: auto;
+  overflow-x: hidden; /* Запрещаем горизонтальный скроллинг */
   -webkit-overflow-scrolling: touch;
   max-height: 100vh;
   -webkit-box-sizing: border-box;
@@ -459,9 +485,10 @@ video {
   display: -moz-flex;
   display: -ms-flexbox;
   display: flex;
-  gap: 12px; /* Увеличен зазор */
-  overflow-x: auto;
-  margin-bottom: 25px; /* Увеличен отступ снизу */
+  gap: 12px;
+  overflow-x: auto; /* Оставляем горизонтальную прокрутку только здесь */
+  overflow-y: hidden; /* Убираем вертикальную прокрутку */
+  margin-bottom: 25px;
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
   white-space: nowrap;
@@ -948,14 +975,39 @@ button.auth-secondary:hover {
   }
 
   .close-btn {
-    top: 120px;
-    right: 10px;
-    font-size: 30px;
-    padding: 8px 12px;
+    bottom: 670px !important; /* Перемещаем кнопку вниз на мобильных устройствах */
+    right: 20px !important;
+    font-size: 24px; /* Сохраняем размер крестика */
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
 
   .progress-bar {
-    top: 100px;
+    position: absolute;
+    top: 120px;
+    width: 100%;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+    gap: 10px;
+    padding: 0 20px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
 
   /* Адаптивные стили для авторизации */
