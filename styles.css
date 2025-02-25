@@ -1,11 +1,20 @@
-html, body {
+/* Нормализация стилей для кросс-браузерности */
+* {
   margin: 0;
   padding: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html, body {
   width: 100%;
   height: 100%;
   overflow: hidden;
   background-color: #000;
-  font-family: Arial, sans-serif;
+  font-family: Arial, Helvetica, sans-serif; /* Добавлены запасные шрифты */
+  -webkit-font-smoothing: antialiased; /* Улучшение шрифтов для Safari */
+  -moz-osx-font-smoothing: grayscale; /* Улучшение шрифтов для Firefox */
 }
 
 #video-container, #app {
@@ -14,8 +23,17 @@ html, body {
   position: absolute;
   top: 0;
   left: 0;
+  display: -webkit-flex; /* Кросс-браузерный flex */
+  display: -moz-flex;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
   justify-content: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
   align-items: center;
 }
 
@@ -24,20 +42,29 @@ html, body {
 }
 
 #app {
-  margin-top: 80px;
+  margin-top: 100px; /* Увеличен отступ сверху */
   z-index: 0;
   display: none;
   background-color: #000;
   color: #fff;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-align-items: flex-start;
+  -moz-align-items: flex-start;
+  -ms-align-items: flex-start;
   align-items: flex-start;
 }
 
 .stories-preview {
   width: 100%;
-  padding: 15px 15px 15px 10px;
+  padding: 20px 20px 20px 15px; /* Увеличены отступы */
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
   display: flex;
-  gap: 15px;
+  gap: 20px; /* Увеличен зазор */
   overflow-x: auto;
   overflow-y: hidden;
   background: transparent;
@@ -45,13 +72,15 @@ html, body {
   white-space: nowrap;
   -ms-overflow-style: none;
   scrollbar-width: none;
-  margin-top: 50px;
-  margin-bottom: 20px;
+  margin-top: 60px; /* Увеличен отступ сверху */
+  margin-bottom: 30px; /* Увеличен отступ снизу */
   animation: fadeIn 0.5s ease forwards;
-  min-height: 130px;
-  max-height: 130px;
+  min-height: 150px; /* Увеличена минимальная высота */
+  max-height: 150px; /* Увеличена максимальная высота */
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
-  margin-left: -5px;
+  margin-left: -10px; /* Увеличен отступ слева */
 }
 
 .stories-preview::-webkit-scrollbar {
@@ -59,25 +88,39 @@ html, body {
 }
 
 .story-preview {
-  width: 100px;
-  height: 100px;
-  border-radius: 12px;
+  width: 120px; /* Увеличена ширина */
+  height: 120px; /* Увеличена высота */
+  border-radius: 14px; /* Увеличен радиус */
   object-fit: cover;
   cursor: pointer;
-  border: 3px solid transparent;
+  border: 4px solid transparent; /* Увеличена толщина границы */
+  -webkit-flex-shrink: 0;
+  -moz-flex-shrink: 0;
+  -ms-flex-shrink: 0;
   flex-shrink: 0;
+  -webkit-animation: scaleIn 0.4s ease forwards;
+  -moz-animation: scaleIn 0.4s ease forwards;
   animation: scaleIn 0.4s ease forwards;
 }
 
 .story-preview.unviewed {
-  border: 3px solid #2b2b2b;
+  border: 4px solid #2b2b2b;
 }
 
 .stories-container {
   width: 100vw;
   height: 100vh;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
   align-items: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
   justify-content: center;
   position: fixed;
   top: 0;
@@ -85,19 +128,45 @@ html, body {
   z-index: 10;
   background-color: #000;
   opacity: 0;
+  -webkit-animation: fadeIn 0.3s ease forwards;
+  -moz-animation: fadeIn 0.3s ease forwards;
   animation: fadeIn 0.3s ease forwards;
 }
 
+@-webkit-keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@-moz-keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
 }
 
+@-webkit-keyframes fadeInUp {
+  from { opacity: 0; -webkit-transform: translateY(20px); transform: translateY(20px); }
+  to { opacity: 1; -webkit-transform: translateY(0); transform: translateY(0); }
+}
+@-moz-keyframes fadeInUp {
+  from { opacity: 0; -moz-transform: translateY(20px); transform: translateY(20px); }
+  to { opacity: 1; -moz-transform: translateY(0); transform: translateY(0); }
+}
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
+@-webkit-keyframes scaleIn {
+  from { opacity: 0; -webkit-transform: scale(0.9); transform: scale(0.9); }
+  to { opacity: 1; -webkit-transform: scale(1); transform: scale(1); }
+}
+@-moz-keyframes scaleIn {
+  from { opacity: 0; -moz-transform: scale(0.9); transform: scale(0.9); }
+  to { opacity: 1; -moz-transform: scale(1); transform: scale(1); }
+}
 @keyframes scaleIn {
   from { opacity: 0; transform: scale(0.9); }
   to { opacity: 1; transform: scale(1); }
@@ -111,20 +180,30 @@ video {
 
 .progress-bar {
   position: absolute;
-  top: 105px;
+  top: 120px; /* Увеличен отступ сверху */
   width: 100%;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
   display: flex;
-  gap: 8px;
-  padding: 0 15px;
+  gap: 10px; /* Увеличен зазор */
+  padding: 0 20px; /* Увеличены отступы */
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 
 .progress-segment {
-  height: 5px;
+  height: 6px; /* Увеличена высота */
   background: rgba(255, 255, 255, 0.3);
+  -webkit-flex: 1;
+  -moz-flex: 1;
+  -ms-flex: 1;
   flex: 1;
-  border-radius: 3px;
+  border-radius: 4px; /* Увеличен радиус */
   overflow: hidden;
+  -webkit-animation: fadeIn 0.5s ease forwards;
+  -moz-animation: fadeIn 0.5s ease forwards;
   animation: fadeIn 0.5s ease forwards;
 }
 
@@ -132,10 +211,16 @@ video {
   height: 100%;
   background: #fff;
   width: 0;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -ms-transition: none;
   transition: none;
 }
 
 .progress-fill.active {
+  -webkit-transition: width linear;
+  -moz-transition: width linear;
+  -ms-transition: width linear;
   transition: width linear;
 }
 
@@ -143,8 +228,17 @@ video {
   position: absolute;
   width: 100%;
   height: 100%;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-justify-content: space-between;
+  -moz-justify-content: space-between;
+  -ms-justify-content: space-between;
   justify-content: space-between;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
   align-items: center;
 }
 
@@ -169,42 +263,57 @@ video {
 
 .story-content {
   position: absolute;
-  bottom: 30px;
-  left: 30px;
-  right: 30px;
+  bottom: 40px; /* Увеличен отступ снизу */
+  left: 40px; /* Увеличен отступ слева */
+  right: 40px; /* Увеличен отступ справа */
   text-align: center;
-  font-size: 20px;
+  font-size: 24px; /* Увеличен шрифт */
+  -webkit-animation: fadeInUp 0.5s ease forwards;
+  -moz-animation: fadeInUp 0.5s ease forwards;
   animation: fadeInUp 0.5s ease forwards;
 }
 
 .close-btn {
   position: absolute;
-  top: 125px;
-  right: 2px;
+  top: 140px; /* Увеличен отступ сверху */
+  right: 10px; /* Увеличен отступ справа */
   background: rgba(255, 255, 255, 0.2);
   border: none;
   color: #fff;
-  font-size: 30px;
-  padding: 8px 14px;
+  font-size: 36px; /* Увеличен шрифт */
+  padding: 10px 16px; /* Увеличены отступы */
   border-radius: 50%;
   cursor: pointer;
+  -webkit-animation: scaleIn 0.4s ease forwards;
+  -moz-animation: scaleIn 0.4s ease forwards;
   animation: scaleIn 0.4s ease forwards;
-  max-height: 40px;
+  max-height: 50px; /* Увеличена максимальная высота */
 }
 
 .learning-module {
   position: absolute;
   top: 0;
   width: 100%;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-align-items: flex-start;
+  -moz-align-items: flex-start;
+  -ms-align-items: flex-start;
   align-items: flex-start;
-  padding: 0 25px 25px;
+  padding: 0 30px 30px; /* Увеличены отступы */
   color: #fff;
   z-index: 1;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   max-height: 100vh;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
   scroll-behavior: smooth;
   -ms-overflow-style: none;
@@ -216,57 +325,78 @@ video {
 }
 
 .greeting-text {
-  font-size: 16px;
-  margin-bottom: 10px;
+  font-size: 20px; /* Увеличен шрифт */
+  margin-bottom: 15px; /* Увеличен отступ снизу */
   color: #ccc;
+  -webkit-animation: fadeInUp 0.5s ease forwards;
+  -moz-animation: fadeInUp 0.5s ease forwards;
   animation: fadeInUp 0.5s ease forwards;
   width: 100%;
 }
 
 .main-question {
-  font-size: 28px;
+  font-size: 36px; /* Увеличен шрифт */
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-bottom: 25px; /* Увеличен отступ снизу */
   color: #fff;
+  -webkit-animation: fadeInUp 0.5s ease forwards;
+  -moz-animation: fadeInUp 0.5s ease forwards;
   animation: fadeInUp 0.5s ease forwards;
   width: 100%;
 }
 
 .search-input {
   width: 100%;
-  padding: 12px 12px 12px 40px;
-  font-size: 18px;
-  border: 2px solid #2b2b2b;
-  border-radius: 12px;
+  padding: 15px 15px 15px 45px; /* Увеличены отступы */
+  font-size: 20px; /* Увеличен шрифт */
+  border: 3px solid #2b2b2b; /* Увеличена толщина границы */
+  border-radius: 14px; /* Увеличен радиус */
   background-color: #000;
   color: #fff;
-  margin-bottom: 20px;
+  margin-bottom: 25px; /* Увеличен отступ снизу */
   outline: none;
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>');
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>'); /* Увеличена иконка */
   background-repeat: no-repeat;
-  background-position: 10px center;
-  background-size: 20px;
+  background-position: 12px center; /* Увеличен отступ иконки */
+  background-size: 24px; /* Увеличен размер иконки */
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
+  -webkit-animation: fadeInUp 0.5s ease forwards;
+  -moz-animation: fadeInUp 0.5s ease forwards;
   animation: fadeInUp 0.5s ease forwards;
 }
 
 .subjects-container {
   width: 100%;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-flex-wrap: wrap;
+  -moz-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 15px; /* Увеличен зазор */
+  -webkit-animation: fadeIn 0.5s ease forwards;
+  -moz-animation: fadeIn 0.5s ease forwards;
   animation: fadeIn 0.5s ease forwards;
 }
 
 .subject-btn {
-  padding: 10px 18px;
-  font-size: 16px;
+  padding: 12px 22px; /* Увеличены отступы */
+  font-size: 18px; /* Увеличен шрифт */
   background-color: #2b2b2b;
   color: #fff;
   border: none;
-  border-radius: 10px;
+  border-radius: 12px; /* Увеличен радиус */
   cursor: pointer;
+  -webkit-transition: background-color 0.3s ease;
+  -moz-transition: background-color 0.3s ease;
+  -ms-transition: background-color 0.3s ease;
   transition: background-color 0.3s ease;
+  -webkit-animation: scaleIn 0.4s ease forwards;
+  -moz-animation: scaleIn 0.4s ease forwards;
   animation: scaleIn 0.4s ease forwards;
 }
 
@@ -276,49 +406,69 @@ video {
 
 .ad-banner {
   width: 100%;
-  margin: 20px 0;
+  margin: 25px 0; /* Увеличен отступ */
+  -webkit-animation: fadeInUp 0.5s ease forwards;
+  -moz-animation: fadeInUp 0.5s ease forwards;
   animation: fadeInUp 0.5s ease forwards;
 }
 
 .ad-image {
   width: 100%;
-  height: 150px;
+  height: 180px; /* Увеличена высота */
   object-fit: cover;
-  border-radius: 10px;
+  border-radius: 12px; /* Увеличен радиус */
 }
 
 .articles-module {
   width: 100%;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-align-items: flex-start;
+  -moz-align-items: flex-start;
+  -ms-align-items: flex-start;
   align-items: flex-start;
 }
 
 .articles-title {
-  font-size: 28px;
+  font-size: 36px; /* Увеличен шрифт */
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: 15px; /* Увеличен отступ снизу */
   color: #fff;
+  -webkit-animation: fadeInUp 0.5s ease forwards;
+  -moz-animation: fadeInUp 0.5s ease forwards;
   animation: fadeInUp 0.5s ease forwards;
 }
 
 .articles-subtitle {
-  font-size: 16px;
+  font-size: 20px; /* Увеличен шрифт */
   color: #ccc;
-  margin-bottom: 20px;
+  margin-bottom: 25px; /* Увеличен отступ снизу */
+  -webkit-animation: fadeInUp 0.5s ease forwards;
+  -moz-animation: fadeInUp 0.5s ease forwards;
   animation: fadeInUp 0.5s ease forwards;
 }
 
 .class-buttons {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
   display: flex;
-  gap: 10px;
+  gap: 12px; /* Увеличен зазор */
   overflow-x: auto;
-  margin-bottom: 20px;
+  margin-bottom: 25px; /* Увеличен отступ снизу */
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
   white-space: nowrap;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  -webkit-animation: fadeIn 0.5s ease forwards;
+  -moz-animation: fadeIn 0.5s ease forwards;
   animation: fadeIn 0.5s ease forwards;
 }
 
@@ -327,14 +477,19 @@ video {
 }
 
 .class-btn {
-  padding: 8px 16px;
-  font-size: 16px;
+  padding: 10px 20px; /* Увеличены отступы */
+  font-size: 18px; /* Увеличен шрифт */
   background-color: #2b2b2b;
   color: #fff;
   border: none;
-  border-radius: 10px;
+  border-radius: 12px; /* Увеличен радиус */
   cursor: pointer;
+  -webkit-transition: background-color 0.3s ease;
+  -moz-transition: background-color 0.3s ease;
+  -ms-transition: background-color 0.3s ease;
   transition: background-color 0.3s ease;
+  -webkit-animation: scaleIn 0.4s ease forwards;
+  -moz-animation: scaleIn 0.4s ease forwards;
   animation: scaleIn 0.4s ease forwards;
 }
 
@@ -349,23 +504,45 @@ video {
 
 .articles-cards {
   width: 100%;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
   flex-direction: column;
-  gap: 15px;
+  gap: 20px; /* Увеличен зазор */
+  -webkit-animation: fadeIn 0.5s ease forwards;
+  -moz-animation: fadeIn 0.5s ease forwards;
   animation: fadeIn 0.5s ease forwards;
 }
 
 .article-card {
-  width: 85%;
-  height: 150px;
-  padding: 20px;
+  width: 90%; /* Увеличена ширина */
+  height: 180px; /* Увеличена высота */
+  padding: 25px; /* Увеличены отступы */
   background-color: #2b2b2b;
-  border-radius: 10px;
+  border-radius: 12px; /* Увеличен радиус */
   cursor: pointer;
+  -webkit-transition: background-color 0.3s ease;
+  -moz-transition: background-color 0.3s ease;
+  -ms-transition: background-color 0.3s ease;
   transition: background-color 0.3s ease;
+  -webkit-animation: fadeInUp 0.5s ease forwards;
+  -moz-animation: fadeInUp 0.5s ease forwards;
   animation: fadeInUp 0.5s ease forwards;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-justify-content: space-between;
+  -moz-justify-content: space-between;
+  -ms-justify-content: space-between;
   justify-content: space-between;
 }
 
@@ -374,14 +551,14 @@ video {
 }
 
 .article-card-title {
-  font-size: 20px;
+  font-size: 24px; /* Увеличен шрифт */
   font-weight: bold;
   color: #fff;
   text-transform: uppercase;
 }
 
 .article-card-subtitle {
-  font-size: 12px;
+  font-size: 14px; /* Увеличен шрифт */
   color: #ccc;
   line-height: 1.4;
 }
@@ -394,22 +571,51 @@ video {
   height: 100%;
   background-color: #000;
   z-index: 5;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
   flex-direction: column;
-  padding: 25px;
+  padding: 30px; /* Увеличены отступы */
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
   opacity: 0;
+  -webkit-transform: translateY(20px);
+  -moz-transform: translateY(20px);
+  -ms-transform: translateY(20px);
   transform: translateY(20px);
 }
 
 .search-screen.open {
+  -webkit-animation: slideIn 0.3s ease forwards;
+  -moz-animation: slideIn 0.3s ease forwards;
   animation: slideIn 0.3s ease forwards;
 }
 
 .search-screen.close {
+  -webkit-animation: slideOut 0.3s ease forwards;
+  -moz-animation: slideOut 0.3s ease forwards;
   animation: slideOut 0.3s ease forwards;
 }
 
+@-webkit-keyframes slideIn {
+  to {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+@-moz-keyframes slideIn {
+  to {
+    opacity: 1;
+    -moz-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
 @keyframes slideIn {
   to {
     opacity: 1;
@@ -417,6 +623,30 @@ video {
   }
 }
 
+@-webkit-keyframes slideOut {
+  from {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    -webkit-transform: translateY(20px);
+    transform: translateY(20px);
+  }
+}
+@-moz-keyframes slideOut {
+  from {
+    opacity: 1;
+    -moz-transform: translateY(0);
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    -moz-transform: translateY(20px);
+    transform: translateY(20px);
+  }
+}
 @keyframes slideOut {
   from {
     opacity: 1;
@@ -429,29 +659,40 @@ video {
 }
 
 .search-header {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
   align-items: center;
   width: 100%;
-  margin-bottom: 25px;
+  margin-bottom: 30px; /* Увеличен отступ снизу */
+  -webkit-flex-shrink: 0;
+  -moz-flex-shrink: 0;
+  -ms-flex-shrink: 0;
   flex-shrink: 0;
 }
 
 .search-header .search-input {
-  width: calc(100% - 100px);
-  margin-right: 10px;
+  width: calc(100% - 120px); /* Увеличена ширина для кнопки "Отмена" */
+  margin-right: 15px; /* Увеличен отступ справа */
 }
 
 .cancel-btn {
   background: none;
   border: none;
   color: #fff;
-  font-size: 18px;
+  font-size: 20px; /* Увеличен шрифт */
   cursor: pointer;
-  padding: 10px 14px;
-  border-radius: 10px;
+  padding: 12px 16px; /* Увеличены отступы */
+  border-radius: 12px; /* Увеличен радиус */
   white-space: nowrap;
+  -webkit-animation: scaleIn 0.4s ease forwards;
+  -moz-animation: scaleIn 0.4s ease forwards;
   animation: scaleIn 0.4s ease forwards;
-  margin-bottom: 16px;
+  margin-bottom: 20px; /* Увеличен отступ снизу */
 }
 
 .cancel-btn:hover {
@@ -459,6 +700,9 @@ video {
 }
 
 .search-results {
+  -webkit-flex-grow: 1;
+  -moz-flex-grow: 1;
+  -ms-flex-grow: 1;
   flex-grow: 1;
   width: 100%;
   color: #fff;
@@ -470,55 +714,80 @@ video {
 /* Стили для авторизации */
 .auth-container {
   width: 100%;
-  max-width: 320px;
-  padding: 33px;
+  max-width: 400px; /* Увеличена максимальная ширина */
+  padding: 40px; /* Увеличены отступы */
   min-height: 100vh;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
   align-items: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
   justify-content: center;
   position: absolute;
   top: 0;
   left: 0;
   z-index: 2;
-  background-color: #000; /* Добавлен фон для единообразия */
+  background-color: #000;
 }
 
 .auth-screen {
   display: none;
   opacity: 0;
+  -webkit-transform: translateX(100%);
+  -moz-transform: translateX(100%);
+  -ms-transform: translateX(100%);
   transform: translateX(100%);
+  -webkit-transition: opacity 0.3s ease, -webkit-transform 0.3s ease;
+  -moz-transition: opacity 0.3s ease, -moz-transform 0.3s ease;
+  -ms-transition: opacity 0.3s ease, -ms-transform 0.3s ease;
   transition: opacity 0.3s ease, transform 0.3s ease;
   width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 
 .auth-screen.active {
   display: block;
   opacity: 1;
+  -webkit-transform: translateX(0);
+  -moz-transform: translateX(0);
+  -ms-transform: translateX(0);
   transform: translateX(0);
 }
 
 .auth-input-group {
-  margin-bottom: 20px;
+  margin-bottom: 25px; /* Увеличен отступ снизу */
   position: relative;
   width: 100%;
 }
 
 .auth-input-group input {
   width: 100%;
-  padding: 8px 0;
+  padding: 12px 10px; /* Увеличены отступы */
   border: none;
-  border-bottom: 1px solid #666;
+  border-bottom: 2px solid #666; /* Увеличена толщина границы */
   background: transparent;
   color: #fff;
-  font-size: 14px;
+  font-size: 18px; /* Увеличен шрифт */
   outline: none;
+  -webkit-transition: border-color 0.3s;
+  -moz-transition: border-color 0.3s;
+  -ms-transition: border-color 0.3s;
   transition: border-color 0.3s;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 
 .auth-input-group input:focus {
-  border-bottom: 1px solid #fff;
+  border-bottom: 2px solid #fff;
 }
 
 .auth-input-group input::placeholder {
@@ -528,23 +797,28 @@ video {
 .auth-error {
   display: block;
   color: #ff5555;
-  font-size: 11px;
-  margin-top: 4px;
-  min-height: 14px;
+  font-size: 14px; /* Увеличен шрифт */
+  margin-top: 6px; /* Увеличен отступ сверху */
+  min-height: 18px; /* Увеличена минимальная высота */
 }
 
 .auth-container button {
   width: 100%;
-  padding: 8px;
+  padding: 12px; /* Увеличены отступы */
   background: #fff;
   color: #000;
   border: none;
-  border-radius: 4px;
-  font-size: 14px;
+  border-radius: 6px; /* Увеличен радиус */
+  font-size: 18px; /* Увеличен шрифт */
   font-weight: 500;
   cursor: pointer;
-  margin-top: 12px;
+  margin-top: 15px; /* Увеличен отступ сверху */
+  -webkit-transition: background 0.3s;
+  -moz-transition: background 0.3s;
+  -ms-transition: background 0.3s;
   transition: background 0.3s;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 
@@ -555,7 +829,7 @@ video {
 button.auth-secondary {
   background: transparent;
   color: #fff;
-  border: 1px solid #666;
+  border: 2px solid #666; /* Увеличена толщина границы */
 }
 
 button.auth-secondary:hover {
@@ -563,176 +837,182 @@ button.auth-secondary:hover {
 }
 
 .auth-back-btn {
-  margin-top: 10px;
-  font-size: 12px;
+  margin-top: 12px; /* Увеличен отступ сверху */
+  font-size: 14px; /* Увеличен шрифт */
 }
 
 #auth-code-screen h3 {
   text-align: center;
-  margin-bottom: 10px;
-  font-size: 16px;
+  margin-bottom: 12px; /* Увеличен отступ снизу */
+  font-size: 20px; /* Увеличен шрифт */
 }
 
 #auth-code-screen p {
   text-align: center;
-  font-size: 12px;
+  font-size: 14px; /* Увеличен шрифт */
   color: #888;
-  margin-bottom: 20px;
+  margin-bottom: 25px; /* Увеличен отступ снизу */
 }
 
 /* Адаптивные стили для телефонов */
 @media (max-width: 480px) {
   /* Общие стили для приложения */
   .stories-preview {
-    padding: 10px 10px 10px 5px;
-    gap: 10px;
-    min-height: 110px;
-    max-height: 110px;
+    padding: 15px 15px 15px 10px;
+    gap: 15px;
+    min-height: 130px;
+    max-height: 130px;
     margin-left: -5px;
-    margin-top: 15px;
+    margin-top: 20px;
   }
 
   .story-preview {
-    width: 85px;
-    height: 85px;
+    width: 100px;
+    height: 100px;
   }
 
   .learning-module {
-    padding: 0 15px 15px; /* Уменьшаем отступы */
+    padding: 0 20px 20px;
     max-height: 100vh;
   }
 
   .greeting-text {
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .main-question {
-    font-size: 20px; /* Уменьшаем заголовок */
+    font-size: 28px;
   }
 
   .search-input {
-    padding: 8px 8px 8px 30px; /* Уменьшаем отступы */
-    font-size: 14px; /* Уменьшаем шрифт */
-    background-size: 16px; /* Уменьшаем иконку поиска */
-    background-position: 6px center;
+    padding: 12px 12px 12px 40px;
+    font-size: 16px;
+    background-size: 20px;
+    background-position: 10px center;
   }
 
   .subjects-container {
-    gap: 8px; /* Уменьшаем расстояние между кнопками */
+    gap: 12px;
   }
 
   .subject-btn {
-    padding: 6px 12px; /* Уменьшаем кнопки */
-    font-size: 12px; /* Уменьшаем шрифт */
+    padding: 10px 18px;
+    font-size: 16px;
   }
 
   .ad-image {
-    height: 100px; /* Уменьшаем высоту баннера */
+    height: 150px;
   }
 
   .articles-title {
-    font-size: 20px; /* Уменьшаем заголовок */
+    font-size: 28px;
   }
 
   .articles-subtitle {
-    font-size: 12px; /* Уменьшаем подзаголовок */
+    font-size: 14px;
   }
 
   .class-btn {
-    padding: 5px 10px; /* Уменьшаем кнопки */
-    font-size: 12px; /* Уменьшаем шрифт */
+    padding: 8px 16px;
+    font-size: 14px;
   }
 
   .article-card {
-    width: 100%; /* Растягиваем карточки на всю ширину */
-    height: 120px; /* Уменьшаем высоту */
-    padding: 10px; /* Уменьшаем внутренние отступы */
+    width: 100%;
+    height: 150px;
+    padding: 15px;
   }
 
   .article-card-title {
-    font-size: 16px; /* Уменьшаем шрифт */
+    font-size: 18px;
   }
 
   .article-card-subtitle {
-    font-size: 10px; /* Уменьшаем шрифт */
+    font-size: 12px;
   }
 
   .search-header .search-input {
-    width: calc(100% - 70px); /* Уменьшаем ширину для кнопки "Отмена" */
+    width: calc(100% - 100px);
   }
 
   .cancel-btn {
-    font-size: 14px; /* Уменьшаем шрифт */
-    padding: 6px 10px; /* Уменьшаем отступы */
+    font-size: 16px;
+    padding: 10px 14px;
   }
 
   .story-content {
-    font-size: 16px; /* Уменьшаем шрифт */
-    bottom: 15px; /* Уменьшаем отступ снизу */
-    left: 15px;
-    right: 15px;
+    font-size: 20px;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
   }
 
   .close-btn {
-    top: 110px; /* Сдвигаем кнопку ближе к верху */
-    right: 15px; /* Увеличиваем отступ справа */
-    font-size: 24px; /* Уменьшаем размер */
-    padding: 5px 10px; /* Уменьшаем отступы */
+    top: 120px;
+    right: 10px;
+    font-size: 30px;
+    padding: 8px 12px;
   }
 
   .progress-bar {
-    top: 90px; /* Сдвигаем прогресс-бар выше */
+    top: 100px;
   }
 
-  /* Адаптивные стили для окна авторизации */
+  /* Адаптивные стили для авторизации */
   .auth-container {
-    padding: 15px; /* Уменьшаем внешние отступы */
-    max-width: 90%; /* Устанавливаем максимальную ширину относительно экрана */
-    margin: 0 auto; /* Центрируем контейнер */
+    padding: 20px;
+    max-width: 95%; /* Увеличена ширина до 95% экрана */
+    margin: 0 auto;
   }
 
   .auth-screen {
-    padding: 10px; /* Уменьшаем внутренние отступы */
-    width: 100%; /* Убедимся, что экран занимает доступную ширину */
+    padding: 15px;
+    width: 100%;
   }
 
   .auth-input-group {
-    margin-bottom: 12px; /* Уменьшаем расстояние между полями */
-    width: 100%; /* Устанавливаем ширину 100% */
+    margin-bottom: 20px;
+    width: 100%;
   }
 
   .auth-input-group input {
-    font-size: 12px; /* Уменьшаем шрифт полей ввода */
-    padding: 6px 8px; /* Уменьшаем внутренние отступы */
-    width: 100%; /* Устанавливаем ширину 100% */
-    box-sizing: border-box; /* Учитываем padding в ширине */
+    font-size: 16px; /* Увеличен шрифт */
+    padding: 10px 12px; /* Увеличены отступы */
+    width: 100%;
+    border-bottom: 2px solid #666;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
   }
 
   .auth-error {
-    font-size: 9px; /* Уменьшаем шрифт ошибок */
-    margin-top: 2px; /* Уменьшаем отступ сверху */
+    font-size: 12px; /* Увеличен шрифт */
+    margin-top: 4px;
   }
 
   .auth-container button {
-    padding: 6px; /* Уменьшаем внутренние отступы кнопок */
-    font-size: 12px; /* Уменьшаем шрифт кнопок */
-    margin-top: 8px; /* Уменьшаем отступ сверху */
-    width: 100%; /* Устанавливаем ширину 100% */
-    box-sizing: border-box; /* Учитываем padding в ширине */
+    padding: 10px;
+    font-size: 16px; /* Увеличен шрифт */
+    margin-top: 12px;
+    width: 100%;
+    border-radius: 6px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
   }
 
   .auth-back-btn {
-    font-size: 10px; /* Уменьшаем шрифт кнопки "Назад" */
-    margin-top: 6px; /* Уменьшаем отступ сверху */
+    font-size: 12px;
+    margin-top: 10px;
   }
 
   #auth-code-screen h3 {
-    font-size: 14px; /* Уменьшаем заголовок */
+    font-size: 18px; /* Увеличен шрифт */
   }
 
   #auth-code-screen p {
-    font-size: 10px; /* Уменьшаем текст */
-    margin-bottom: 12px; /* Уменьшаем отступ снизу */
+    font-size: 12px; /* Увеличен шрифт */
+    margin-bottom: 20px;
   }
 }
 
@@ -742,11 +1022,11 @@ button.auth-secondary:hover {
   }
 
   .stories-preview {
-    padding: 10px 10px 10px 5px;
-    margin-bottom: 20px;
-    min-height: 110px;
-    max-height: 110px;
+    padding: 15px 15px 15px 10px;
+    margin-bottom: 25px;
+    min-height: 130px;
+    max-height: 130px;
     margin-left: -5px;
-    margin-top: 15px;
+    margin-top: 20px;
   }
 }
