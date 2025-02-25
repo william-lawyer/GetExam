@@ -14,53 +14,53 @@
         </video>
     </div>
 
-    <div class="container" id="auth-container" style="display: none;">
+    <div class="auth-container" id="auth-container" style="display: none;">
         <!-- Экран входа -->
-        <div id="login-screen" class="screen">
-            <div class="input-group">
+        <div id="auth-login-screen" class="auth-screen">
+            <div class="auth-input-group">
                 <input type="text" id="login-username" placeholder="Логин">
-                <span class="error" id="login-username-error"></span>
+                <span class="auth-error" id="login-username-error"></span>
             </div>
-            <div class="input-group">
+            <div class="auth-input-group">
                 <input type="password" id="login-password" placeholder="Пароль">
-                <span class="error" id="login-password-error"></span>
+                <span class="auth-error" id="login-password-error"></span>
             </div>
             <button onclick="handleLogin()">Войти</button>
-            <button class="secondary" onclick="showRegister()">Регистрация</button>
+            <button class="auth-secondary" onclick="showRegister()">Регистрация</button>
         </div>
 
         <!-- Экран регистрации -->
-        <div id="register-screen" class="screen">
-            <div class="input-group">
+        <div id="auth-register-screen" class="auth-screen">
+            <div class="auth-input-group">
                 <input type="text" id="reg-name" placeholder="Имя">
-                <span class="error" id="reg-name-error"></span>
+                <span class="auth-error" id="reg-name-error"></span>
             </div>
-            <div class="input-group">
+            <div class="auth-input-group">
                 <input type="text" id="reg-username" placeholder="Логин">
-                <span class="error" id="reg-username-error"></span>
+                <span class="auth-error" id="reg-username-error"></span>
             </div>
-            <div class="input-group">
+            <div class="auth-input-group">
                 <input type="email" id="reg-email" placeholder="Почта">
-                <span class="error" id="reg-email-error"></span>
+                <span class="auth-error" id="reg-email-error"></span>
             </div>
-            <div class="input-group">
+            <div class="auth-input-group">
                 <input type="password" id="reg-password" placeholder="Пароль">
-                <span class="error" id="reg-password-error"></span>
+                <span class="auth-error" id="reg-password-error"></span>
             </div>
             <button onclick="handleRegister()">Создать</button>
-            <button class="secondary back-btn" onclick="goBack('login')">Назад</button>
+            <button class="auth-secondary auth-back-btn" onclick="goBack('login')">Назад</button>
         </div>
 
         <!-- Экран ввода кода -->
-        <div id="code-screen" class="screen">
+        <div id="auth-code-screen" class="auth-screen">
             <h3>Введите код подтверждения</h3>
             <p>Мы отправили код на вашу почту</p>
-            <div class="input-group">
+            <div class="auth-input-group">
                 <input type="text" id="reg-code" placeholder="Код">
-                <span class="error" id="reg-code-error"></span>
+                <span class="auth-error" id="reg-code-error"></span>
             </div>
             <button onclick="verifyCode()">Подтвердить</button>
-            <button class="secondary back-btn" onclick="goBack('register')">Назад</button>
+            <button class="auth-secondary auth-back-btn" onclick="goBack('register')">Назад</button>
         </div>
     </div>
 
@@ -110,4 +110,4 @@
 
     <script src="script.js"></script>
 </body>
-</html>
+</html> 
