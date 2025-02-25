@@ -653,4 +653,4 @@ function updateArticlesCards(classId) {
         card.appendChild(subtitle);
         articlesCards.appendChild(card);
     });
-} 
+}
