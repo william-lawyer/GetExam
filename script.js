@@ -49,14 +49,14 @@ let authStarted = false; // Флаг для предотвращения пов�
 let videoTimeout; // Переменная для хранения таймера
 
 const stories = [
-    { type: 'image', url: 'story1.jpg', preview: 'story1.jpg', duration: 5000, text: 'Welcome to our app!', viewed: false },
-    { type: 'image', url: 'story1.jpg', preview: 'story1.jpg', duration: 10000, text: 'Watch this cool video', viewed: false },
-    { type: 'image', url: 'story1.jpg', preview: 'story1.jpg', duration: 7000, text: 'Special offer just for you!', viewed: false },
-    { type: 'image', url: 'story1.jpg', preview: 'story1.jpg', duration: 5000, text: 'Story 4', viewed: false },
-    { type: 'image', url: 'story1.jpg', preview: 'story1.jpg', duration: 5000, text: 'Story 5', viewed: false },
-    { type: 'image', url: 'story1.jpg', preview: 'story1.jpg', duration: 5000, text: 'Story 6', viewed: false },
-    { type: 'image', url: 'story1.jpg', preview: 'story1.jpg', duration: 5000, text: 'Story 7', viewed: false },
-    { type: 'image', url: 'story1.jpg', preview: 'story1.jpg', duration: 5000, text: 'Story 8', viewed: false }
+    { type: 'image', url: './history/history1.png', preview: './history/history1_prew.png', duration: 5000, text: 'Welcome to our app!', viewed: false },
+    { type: 'image', url: './history/history2.png', preview: './history/history2_prew.png', duration: 5000, text: 'Watch this cool video', viewed: false },
+    { type: 'image', url: './history/history1.png', preview: './history/history1_prew.png', duration: 5000, text: 'Special offer just for you!', viewed: false },
+    { type: 'image', url: './history/history2.png', preview: './history/history2_prew.png', duration: 5000, text: 'Story 4', viewed: false },
+    { type: 'image', url: './history/history1.png', preview: './history/history1_prew.png', duration: 5000, text: 'Story 5', viewed: false },
+    { type: 'image', url: './history/history2.png', preview: './history/history2_prew.png', duration: 5000, text: 'Story 6', viewed: false },
+    { type: 'image', url: './history/history1.png', preview: './history/history1_prew.png', duration: 5000, text: 'Story 7', viewed: false },
+    { type: 'image', url: './history/history2.png', preview: './history/history2_prew.png', duration: 5000, text: 'Story 8', viewed: false }
 ];
 
 const articlesData = {
@@ -447,50 +447,50 @@ function openStories() {
 }
 
 function createStories() {
-  storiesContainer.innerHTML = `
-      <div class="progress-bar" id="progressBar"></div>
-      <div class="controls">
-          <button class="control-area" id="prevStory"></button>
-          <button class="control-area" id="nextStory"></button>
-      </div>
-      <button class="close-btn" id="closeStories">×</button>
-  `;
-  const progressBar = document.getElementById("progressBar");
+storiesContainer.innerHTML = `
+    <div class="progress-bar" id="progressBar"></div>
+    <div class="controls">
+        <button class="control-area" id="prevStory"></button>
+        <button class="control-area" id="nextStory"></button>
+    </div>
+    <button class="close-btn" id="closeStories">×</button>
+`;
+const progressBar = document.getElementById("progressBar");
 
-  stories.forEach((story) => {
-      const element = story.type === 'image' 
-          ? document.createElement('img') 
-          : document.createElement('video');
+stories.forEach((story) => {
+    const element = story.type === 'image' 
+        ? document.createElement('img') 
+        : document.createElement('video');
 
-      element.src = story.url;
-      element.classList.add('story');
-      if (story.type === 'video') {
-          element.muted = true;
-          element.loop = false;
-      }
-      storiesContainer.appendChild(element);
+    element.src = story.url;
+    element.classList.add('story');
+    if (story.type === 'video') {
+        element.muted = true;
+        element.loop = false;
+    }
+    storiesContainer.appendChild(element);
 
-      const textElement = document.createElement('div');
-      textElement.classList.add('story-content');
-      textElement.textContent = story.text;
-      element.after(textElement);
+    const textElement = document.createElement('div');
+    textElement.classList.add('story-content');
+    textElement.textContent = story.text;
+    element.after(textElement);
 
-      const segment = document.createElement('div');
-      segment.classList.add('progress-segment');
-      const fill = document.createElement('div');
-      fill.classList.add('progress-fill');
-      segment.appendChild(fill);
-      progressBar.appendChild(segment);
-  });
+    const segment = document.createElement('div');
+    segment.classList.add('progress-segment');
+    const fill = document.createElement('div');
+    fill.classList.add('progress-fill');
+    segment.appendChild(fill);
+    progressBar.appendChild(segment);
+});
 
   // Явное позиционирование кнопки после создания
-  const closeBtn = document.getElementById('closeStories');
-  if (closeBtn) {
-      closeBtn.style.bottom = '20px';
-      closeBtn.style.right = '10px';
-  }
+const closeBtn = document.getElementById('closeStories');
+if (closeBtn) {
+    closeBtn.style.bottom = '20px';
+    closeBtn.style.right = '10px';
+}
 
-  bindStoryControls();
+bindStoryControls();
 }
 
 function showStory(index) {
