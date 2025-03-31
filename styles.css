@@ -551,7 +551,7 @@ video {
 .article-card {
   width: 100%;
   max-width: 400px;
-  height: 120px; /* Устанавливаем фиксированную высоту для десктопа (уменьшена с 180px) */
+  height: 120px;
   padding: 15px;
   background-color: #2b2b2b;
   border-radius: 12px;
@@ -562,24 +562,26 @@ video {
   flex-direction: column;
   justify-content: space-between;
   box-sizing: border-box;
-  overflow: hidden; /* Предотвращаем выход содержимого за пределы */
+  overflow: hidden;
 }
 
 .article-card:hover {
-  background-color: #444;
+  background-color: #3a3a3a;
 }
 
 .article-card-title {
-  font-size: 24px; /* Увеличен шрифт */
+  font-size: 18px;
   font-weight: bold;
   color: #fff;
-  text-transform: uppercase;
 }
 
 .article-card-subtitle {
-  font-size: 14px; /* Увеличен шрифт */
+  font-size: 14px;
   color: #ccc;
-  line-height: 1.4;
+  margin-top: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .search-screen {
@@ -980,17 +982,17 @@ button.auth-secondary:hover {
   }
 
   .article-card {
-    width: 100%;
-    height: 150px;
-    padding: 15px;
+    height: 100px;
+    padding: 10px;
   }
 
   .article-card-title {
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .article-card-subtitle {
     font-size: 12px;
+    margin-top: 6px;
   }
 
   .search-header .search-input {
@@ -1866,4 +1868,185 @@ button.auth-secondary:hover {
       font-size: 14px;
       padding: 8px 16px;
   }
+}
+
+/* Стили для вкладки "Теория" */
+.theory-title {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 25px;
+  color: #fff;
+  animation: fadeInUp 0.5s ease forwards;
+  width: 100%;
+}
+
+.theory-cards {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-bottom: 90px; /* Учитываем высоту nav-footer */
+}
+
+.theory-card {
+  width: 100%;
+  max-width: 400px;
+  height: 90px;
+  padding: 15px;
+  background-color: #2b2b2b;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  animation: fadeInUp 0.5s ease forwards;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.theory-card:hover {
+  background-color: #3a3a3a;
+}
+
+.theory-card-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.theory-card-desc {
+  font-size: 14px;
+  color: #ccc;
+  margin-top: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Стили для экрана полной теории */
+.theory-full-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #1a1a1a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 30;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.theory-full-content {
+  width: 90%;
+  max-width: 800px;
+  padding: 20px;
+  padding-top: 120px;
+  color: #fff;
+}
+
+.theory-full-title {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.theory-full-text {
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.back-theory-btn {
+  position: absolute;
+  top: 115px;
+  right: 30px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Адаптивные стили */
+@media (max-width: 480px) {
+  .theory-title {
+    font-size: 28px;
+  }
+
+  .theory-card {
+    height: 80px;
+    padding: 10px;
+  }
+
+  .theory-card {
+    height: 80px; /* Уменьшено с 100px */
+    padding: 10px;
+  }
+
+  .theory-card-title {
+    font-size: 16px;
+    margin-bottom: 6px;
+  }
+
+  .theory-card-desc {
+    font-size: 12px;
+    margin-top: 6px;
+  }
+
+  .theory-full-content {
+    padding-top: 100px;
+  }
+
+  .theory-full-title {
+    font-size: 28px;
+  }
+
+  .theory-full-text {
+    font-size: 16px;
+  }
+
+  .back-theory-btn {
+    top: 95px;
+    right: 25px;
+    font-size: 16px;
+  }
+}
+
+.theory-filters {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  gap: 15px;
+  margin: 15px 0;
+}
+
+.theory-filters select {
+  flex: 1;
+  padding: 10px;
+  background-color: #2b2b2b;
+  color: #fff;
+  border: 1px solid #444;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.theory-filters select option {
+  background-color: #2b2b2b;
+  color: #fff;
 }
