@@ -53,7 +53,6 @@
 
         <!-- Экран ввода кода -->
         <div id="auth-code-screen" class="auth-screen">
-            <h3>Введите код подтверждения</h3>
             <p>Мы отправили код на вашу почту</p>
             <div class="auth-input-group">
                 <input type="text" id="reg-code" placeholder="Код">
@@ -65,7 +64,8 @@
     </div>
 
     <div id="app" style="display: none;">
-        <div class="learning-module">
+        <!-- Главная страница -->
+        <div class="learning-module" id="main-page">
             <div class="stories-preview" id="storiesPreview"></div>
             <div class="greeting-text">Привет!</div>
             <div class="main-question">Что будем учить?</div>
@@ -98,6 +98,17 @@
                 <div class="articles-cards" id="articlesCards"></div>
             </div>
         </div>
+
+        <!-- Страница пробных вариантов -->
+        <div class="learning-module" id="practice-page" style="display: none;">
+            <div class="practice-title">Задания</div>
+            <div class="exam-buttons">
+                <button class="exam-btn" data-exam="oge" onclick="filterExam('oge')">ОГЭ</button>
+                <button class="exam-btn" data-exam="ege" onclick="filterExam('ege')">ЕГЭ</button>
+            </div>
+            <div class="exam-subjects" id="examSubjects"></div>
+        </div>
+
         <div class="search-screen" id="searchScreen" style="display: none;">
             <div class="search-header">
                 <input type="text" class="search-input" id="searchInput" placeholder="Поиск...">
@@ -105,8 +116,24 @@
             </div>
             <div class="search-results" id="searchResults"></div>
         </div>
+
+        <!-- Всплывающее окно для выбора заданий -->
+        <div class="task-modal" id="taskModal" style="display: none;">
+            <div class="task-modal-content">
+                <button class="close-modal-btn" onclick="closeTaskModal()">×</button>
+                <div class="task-title" id="taskModalTitle"></div>
+                <div class="task-buttons" id="taskModalButtons"></div>
+            </div>
+        </div>
     </div>
+
     <div class="stories-container" id="storiesContainer" style="display: none;"></div>
+
+    <!-- Нижняя панель навигации -->
+    <footer class="nav-footer" id="navFooter">
+        <button class="nav-btn active" onclick="switchPage('main-page')">Главная</button>
+        <button class="nav-btn" onclick="switchPage('practice-page')">Задания</button>
+    </footer>
 
     <script src="script.js"></script>
 </body>
