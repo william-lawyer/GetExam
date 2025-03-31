@@ -333,6 +333,7 @@ video {
   -ms-align-items: flex-start;
   align-items: flex-start;
   padding: 0 30px 30px;
+  padding-bottom: 70px;
   color: #fff;
   z-index: 1;
   overflow-y: auto;
@@ -536,6 +537,7 @@ video {
   display: -moz-flex;
   display: -ms-flexbox;
   display: flex;
+  padding-bottom: 70px;
   -webkit-flex-direction: column;
   -moz-flex-direction: column;
   -ms-flex-direction: column;
@@ -547,31 +549,20 @@ video {
 }
 
 .article-card {
-  width: 90%; /* Увеличена ширина */
-  height: 180px; /* Увеличена высота */
-  padding: 25px; /* Увеличены отступы */
+  width: 100%;
+  max-width: 400px;
+  height: 120px; /* Устанавливаем фиксированную высоту для десктопа (уменьшена с 180px) */
+  padding: 15px;
   background-color: #2b2b2b;
-  border-radius: 12px; /* Увеличен радиус */
+  border-radius: 12px;
   cursor: pointer;
-  -webkit-transition: background-color 0.3s ease;
-  -moz-transition: background-color 0.3s ease;
-  -ms-transition: background-color 0.3s ease;
   transition: background-color 0.3s ease;
-  -webkit-animation: fadeInUp 0.5s ease forwards;
-  -moz-animation: fadeInUp 0.5s ease forwards;
   animation: fadeInUp 0.5s ease forwards;
-  display: -webkit-flex;
-  display: -moz-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-  -moz-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
-  -webkit-justify-content: space-between;
-  -moz-justify-content: space-between;
-  -ms-justify-content: space-between;
   justify-content: space-between;
+  box-sizing: border-box;
+  overflow: hidden; /* Предотвращаем выход содержимого за пределы */
 }
 
 .article-card:hover {
@@ -902,7 +893,16 @@ button.auth-secondary:hover {
   .learning-module {
     padding: 0 20px 20px;
     max-height: 100vh;
-  }
+    padding-bottom: 60px;
+ }
+
+ .nav-footer {
+  height: 50px; /* Оставляем фиксированную высоту */
+}
+
+ .articles-cards {
+  padding-bottom: 60px; /* Соответственно для мобильных */
+}
 
   .greeting-text {
     font-size: 16px;
@@ -1088,6 +1088,7 @@ button.auth-secondary:hover {
   justify-content: space-around;
   padding: 10px 0;
   z-index: 10;
+  height: 50px; /* Фиксируем высоту для точности */
 }
 
 .nav-btn {
@@ -1364,27 +1365,35 @@ button.auth-secondary:hover {
 /* Адаптивные стили */
 @media (max-width: 480px) {
   .exam-subjects {
-    padding: 0 5px; /* Уменьшаем боковые отступы для мобильных */
-    gap: 15px; /* Уменьшаем зазор между карточками */
+    padding: 0 5px;
+    gap: 15px;
     max-height: calc(100vh - 130px);
     padding-bottom: 60px;
   }
 
   .article-card {
-    width: 100%; /* Оставляем 100% ширины */
-    max-width: none; /* Убираем ограничение максимальной ширины */
-    height: 150px; /* Уменьшаем высоту для мобильных */
-    padding: 10px; /* Уменьшаем внутренние отступы */
+    width: 100%;
+    max-width: none;
+    height: 70px; /* Устанавливаем фиксированную высоту для мобильных (уменьшена с 150px) */
+    padding: 10px;
+    min-height: 70px; /* Убеждаемся, что высота не уменьшается */
+    max-height: 100px; /* Ограничиваем максимальную высоту */
   }
 
   .article-card-title {
     font-size: 16px;
     margin-bottom: 6px;
+    overflow: hidden; /* Обрезаем текст, если он слишком длинный */
+    text-overflow: ellipsis; /* Добавляем многоточие для длинных заголовков */
+    white-space: nowrap; /* Предотвращаем перенос текста */
   }
 
   .article-card-subtitle {
     font-size: 12px;
     margin-top: 6px;
+    overflow: hidden; /* Обрезаем текст в подзаголовке */
+    text-overflow: ellipsis; /* Многоточие для длинного текста */
+    white-space: nowrap; /* Предотвращаем перенос текста */
   }
 
   .task-modal-content {
@@ -1441,7 +1450,7 @@ button.auth-secondary:hover {
   width: 90%;
   max-width: 800px;
   padding: 20px;
-  padding-top: 80px;
+  padding-top: 120px; /* Увеличиваем отступ сверху с 80px до 120px */
   color: #fff;
 }
 
@@ -1497,8 +1506,8 @@ button.auth-secondary:hover {
 
 .back-task-info-btn {
   position: absolute;
-  top: 70px;
-  right: 20px;
+  top: 115px; /* Опускаем ниже с 110px до 115px */
+  right: 30px; /* Отодвигаем от правого края с 20px до 30px */
   background: none;
   border: none;
   color: #fff;
@@ -1510,9 +1519,8 @@ button.auth-secondary:hover {
 /* Адаптивные стили */
 @media (max-width: 480px) {
   .task-info-content {
-      padding-top: 60px;
+    padding-top: 100px; /* Увеличиваем с 60px до 100px для мобильных */
   }
-
   .task-info-title {
       font-size: 28px;
   }
@@ -1536,9 +1544,9 @@ button.auth-secondary:hover {
   }
 
   .back-task-info-btn {
-      top: 50px;
-      right: 15px;
-      font-size: 16px;
+    top: 95px; /* Опускаем ниже с 90px до 95px */
+    right: 25px; /* Отодвигаем с 15px до 25px */
+    font-size: 16px;
   }
 }
 
@@ -1565,7 +1573,7 @@ button.auth-secondary:hover {
   width: 90%;
   max-width: 800px;
   padding: 20px;
-  padding-top: 80px;
+  padding-top: 120px; /* Увеличиваем отступ сверху с 80px до 120px */
   color: #fff;
 }
 
@@ -1668,8 +1676,8 @@ button.auth-secondary:hover {
 
 .back-task-execution-btn {
   position: absolute;
-  top: 70px;
-  right: 20px;
+  top: 115px; /* Опускаем ниже с 110px до 115px */
+  right: 30px; /* Отодвигаем от правого края с 20px до 30px */
   background: none;
   border: none;
   color: #fff;
@@ -1758,7 +1766,7 @@ button.auth-secondary:hover {
 /* Адаптивные стили */
 @media (max-width: 480px) {
   .task-execution-content {
-      padding-top: 60px;
+    padding-top: 100px; /* Увеличиваем с 60px до 100px для мобильных */
   }
 
   .task-layout {
@@ -1797,9 +1805,9 @@ button.auth-secondary:hover {
   }
 
   .back-task-execution-btn {
-      top: 50px;
-      right: 15px;
-      font-size: 16px;
+    top: 95px; /* Опускаем ниже с 90px до 95px */
+    right: 25px; /* Отодвигаем с 15px до 25px */
+    font-size: 16px;
   }
 
   .result-modal-content {
