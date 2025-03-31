@@ -1131,3 +1131,258 @@ function showVariantTheory(examType, subject, taskCount) {
         }, 150);
     };
 }
+
+// Глобальные переменные
+let theoryData = [];
+let currentPage = 'main-page';
+
+// Загрузка данных теории
+fetch('theory.json')
+  .then(response => response.json())
+  .then(data => {
+    theoryData = data;
+    updateTheoryCards();
+    updateArticlesCards();
+  })
+  .catch(error => console.error('Ошибка загрузки теории:', error));
+
+// Переключение страниц
+function switchPage(pageId) {
+    const pages = ['main-page', 'practice-page', 'theory-page'];
+    pages.forEach(id => {
+      const page = document.getElementById(id);
+      page.style.display = id === pageId ? 'flex' : 'none';
+    });
+    document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelector(`.nav-btn[onclick="switchPage('${pageId}')"]`).classList.add('active');
+    currentPage = pageId;
+  
+    if (pageId === 'theory-page') {
+      updateTheoryCards();
+    } else if (pageId === 'main-page') {
+      updateArticlesCards();
+      document.getElementById('searchScreen').style.display = 'none'; // Закрываем экран поиска
+      document.getElementById('mainSearch').value = ''; // Очищаем поиск
+    }
+  }
+
+// Переход на вкладку "Теория" с фильтром по предмету
+function goToTheory(subject) {
+  document.getElementById('subjectFilter').value = subject;
+  document.getElementById('classFilter').value = '';
+  updateTheoryCards();
+  switchPage('theory-page');
+}
+
+// Обновление карточек теории (для #theoryCards)
+function updateTheoryCards() {
+  const container = document.getElementById('theoryCards');
+  if (!container) return;
+  container.innerHTML = '';
+
+  let filteredTheory = theoryData;
+  const subjectFilter = document.getElementById('subjectFilter').value;
+  const classFilter = document.getElementById('classFilter').value;
+  const searchQuery = document.getElementById('theorySearch').value.trim().toLowerCase();
+
+  if (subjectFilter) {
+    filteredTheory = filteredTheory.filter(item => item.subject === subjectFilter);
+  }
+  if (classFilter) {
+    filteredTheory = filteredTheory.filter(item => item.class === classFilter);
+  }
+  if (searchQuery) {
+    filteredTheory = filteredTheory.filter(item => item.title.toLowerCase().includes(searchQuery));
+  }
+
+  filteredTheory.forEach(item => {
+    const card = document.createElement('div');
+    card.classList.add('theory-card');
+    card.onclick = () => showTheoryFull(item.id);
+
+    const title = document.createElement('div');
+    title.classList.add('theory-card-title');
+    title.textContent = item.title;
+
+    const desc = document.createElement('div');
+    desc.classList.add('theory-card-desc');
+    desc.textContent = item.description;
+
+    card.appendChild(title);
+    card.appendChild(desc);
+    container.appendChild(card);
+  });
+}
+
+// Поиск на главной странице (для #mainTheoryCards)
+function searchMainPage() {
+  const searchQuery = document.getElementById('mainSearch').value.trim().toLowerCase();
+  const mainTheoryCards = document.getElementById('mainTheoryCards');
+  const articlesModule = document.querySelector('.articles-module');
+  const subjectsContainer = document.querySelector('.subjects-container');
+  const adBanner = document.querySelector('.ad-banner');
+
+  mainTheoryCards.innerHTML = '';
+
+  if (searchQuery) {
+    articlesModule.style.display = 'none';
+    subjectsContainer.style.display = 'none';
+    adBanner.style.display = 'none';
+    mainTheoryCards.style.display = 'flex';
+
+    const filteredTheory = theoryData.filter(item => item.title.toLowerCase().includes(searchQuery));
+    filteredTheory.forEach(item => {
+      const card = document.createElement('div');
+      card.classList.add('theory-card');
+      card.onclick = () => showTheoryFull(item.id);
+
+      const title = document.createElement('div');
+      title.classList.add('theory-card-title');
+      title.textContent = item.title;
+
+      const desc = document.createElement('div');
+      desc.classList.add('theory-card-desc');
+      desc.textContent = item.description;
+
+      card.appendChild(title);
+      card.appendChild(desc);
+      mainTheoryCards.appendChild(card);
+    });
+  } else {
+    articlesModule.style.display = 'block';
+    subjectsContainer.style.display = 'flex';
+    adBanner.style.display = 'block';
+    mainTheoryCards.style.display = 'none';
+  }
+}
+
+// Показ полного текста теории
+function showTheoryFull(id) {
+  const theory = theoryData.find(item => item.id === id);
+  if (!theory) return;
+
+  const screen = document.getElementById('theoryFullScreen');
+  const title = document.getElementById('theoryFullTitle');
+  const text = document.getElementById('theoryFullText');
+
+  title.textContent = theory.title;
+  text.textContent = theory.fullText;
+
+  screen.style.display = 'flex';
+  setTimeout(() => { screen.style.opacity = '1'; }, 10);
+}
+
+// Закрытие экрана теории
+function closeTheoryFull() {
+  const screen = document.getElementById('theoryFullScreen');
+  screen.style.opacity = '0';
+  setTimeout(() => { screen.style.display = 'none'; }, 150);
+  if (currentPage === 'main-page') {
+    searchMainPage(); // Обновляем поиск после закрытия
+  }
+}
+
+// Обновление карточек предметов на главной странице
+function updateArticlesCards() {
+  const container = document.getElementById('articlesCards');
+  container.innerHTML = '';
+  const activeClass = document.querySelector('.class-btn.active').dataset.class;
+
+  const subjects = [...new Set(theoryData.map(item => item.subject))];
+  subjects.forEach(subject => {
+    const card = document.createElement('div');
+    card.classList.add('article-card');
+    card.onclick = () => {
+      const subjectFilter = document.getElementById('subjectFilter');
+      const classFilter = document.getElementById('classFilter');
+      subjectFilter.value = subject;
+      classFilter.value = activeClass === 'exam' ? '' : activeClass;
+      
+      if (currentPage === 'main-page' || currentPage === 'theory-page') {
+        switchPage('theory-page');
+        updateTheoryCards();
+      } else if (currentPage === 'practice-page') {
+        console.log(`Переход на задания по ${subject} для ${activeClass}`);
+      }
+    };
+
+    const title = document.createElement('div');
+    title.classList.add('article-card-title');
+    title.textContent = subject;
+
+    const subtitle = document.createElement('div');
+    subtitle.classList.add('article-card-subtitle');
+    const topicsCount = theoryData.filter(item => item.subject === subject && (activeClass === 'exam' || item.class === activeClass)).length;
+    subtitle.textContent = `${topicsCount} тем${topicsCount % 10 === 1 && topicsCount !== 11 ? 'а' : topicsCount % 10 >= 2 && topicsCount % 10 <= 4 && (topicsCount < 10 || topicsCount > 20) ? 'ы' : ''}`;
+
+    card.appendChild(title);
+    card.appendChild(subtitle);
+    container.appendChild(card);
+  });
+}
+
+// Переключение активного класса
+document.querySelectorAll('.class-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.class-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    updateArticlesCards();
+  });
+});
+
+// Открытие экрана поиска
+function openSearchScreen() {
+    const searchQuery = document.getElementById('mainSearch').value.trim().toLowerCase();
+    const searchScreen = document.getElementById('searchScreen');
+    const searchInput = document.getElementById('searchInput');
+  
+    if (searchQuery) {
+      searchScreen.style.display = 'flex';
+      setTimeout(() => { searchScreen.style.opacity = '1'; }, 10);
+      searchInput.value = searchQuery;
+      updateSearchResults();
+    } else {
+      searchScreen.style.display = 'none';
+    }
+  }
+
+  function updateSearchResults() {
+    const searchQuery = document.getElementById('searchInput').value.trim().toLowerCase();
+    const searchResults = document.getElementById('searchResults');
+    searchResults.innerHTML = '';
+  
+    if (searchQuery) {
+      const filteredTheory = theoryData.filter(item => item.title.toLowerCase().includes(searchQuery));
+      filteredTheory.forEach(item => {
+        const card = document.createElement('div');
+        card.classList.add('theory-card');
+        card.onclick = () => showTheoryFull(item.id);
+  
+        const title = document.createElement('div');
+        title.classList.add('theory-card-title');
+        title.textContent = item.title;
+  
+        const desc = document.createElement('div');
+        desc.classList.add('theory-card-desc');
+        desc.textContent = item.description;
+  
+        card.appendChild(title);
+        card.appendChild(desc);
+        searchResults.appendChild(card);
+      });
+    }
+  }
+
+  // Закрытие экрана поиска
+function closeSearchScreen() {
+    const searchScreen = document.getElementById('searchScreen');
+    searchScreen.style.opacity = '0';
+    setTimeout(() => { 
+      searchScreen.style.display = 'none'; 
+      document.getElementById('mainSearch').value = ''; // Очищаем исходный поиск
+    }, 150);
+  }
+
+// Инициализация
+updateArticlesCards();
+
