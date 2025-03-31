@@ -873,6 +873,26 @@ button.auth-secondary:hover {
   margin-bottom: 25px; /* Увеличен отступ снизу */
 }
 
+.check-answer-btn {
+  width: 100%;
+  max-width: 400px;
+  padding: 12px;
+  background-color: #ffd700; /* Зелёный цвет для ассоциации с проверкой */
+  color: #000000;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 15px 0; /* Отступы сверху и снизу для согласованности с другими кнопками */
+  -webkit-tap-highlight-color: transparent;
+}
+
+.check-answer-btn:hover {
+  background-color: #a7b300; /* Чуть темнее при наведении */
+}
+
 /* Адаптивные стили для телефонов */
 @media (max-width: 480px) {
   /* Общие стили для приложения */
@@ -884,6 +904,13 @@ button.auth-secondary:hover {
     margin-left: -5px;
     margin-top: 20px;
   }
+
+  .check-answer-btn {
+    max-width: 100%;
+    font-size: 16px;
+    padding: 10px;
+  }
+
 
   .story-preview {
     width: 100px;
@@ -897,7 +924,14 @@ button.auth-secondary:hover {
  }
 
  .nav-footer {
-  height: 50px; /* Оставляем фиксированную высоту */
+  height: 60px; /* Чуть меньше для мобильных, но всё равно больше исходного */
+  padding: 10px 0;
+}
+
+.nav-btn {
+  font-size: 20px; /* Уменьшаем иконки для мобильных */
+  width: 40px;
+  height: 40px;
 }
 
  .articles-cards {
@@ -1086,25 +1120,30 @@ button.auth-secondary:hover {
   background-color: #2b2b2b;
   display: flex;
   justify-content: space-around;
-  padding: 10px 0;
+  padding: 15px 0; /* Увеличиваем padding с 10px до 15px */
   z-index: 10;
-  height: 50px; /* Фиксируем высоту для точности */
+  height: 70px; /* Увеличиваем высоту с 50px до 70px */
+  align-items: center; /* Центрируем иконки по вертикали */
 }
 
 .nav-btn {
   background: none;
   border: none;
   color: #fff;
-  font-size: 16px;
-  padding: 10px 20px;
+  font-size: 24px; /* Увеличиваем размер иконок */
+  padding: 10px; /* Уменьшаем padding, так как текст заменён иконками */
   cursor: pointer;
   transition: color 0.3s ease;
-  -webkit-tap-highlight-color: transparent; /* Убирает синее выделение */
+  -webkit-tap-highlight-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px; /* Фиксируем ширину кнопки */
+  height: 50px; /* Фиксируем высоту кнопки */
 }
 
 .nav-btn.active {
-  color: #ffd700;
-  font-weight: bold;
+  color: #ffd700; /* Цвет активной вкладки остаётся золотым */
 }
 
 .nav-btn:hover {
