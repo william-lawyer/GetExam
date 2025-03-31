@@ -1156,18 +1156,19 @@ button.auth-secondary:hover {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 30px; /* Увеличено с 20px до 30px для большего расстояния между карточками */
+  gap: 20px; /* Уменьшаем зазор до более разумного значения */
   padding-bottom: 80px;
   max-height: calc(100vh - 150px);
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  /* Скрытие скроллбара */
-  -ms-overflow-style: none; /* IE и Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  padding: 0 10px; /* Добавляем небольшие отступы по бокам */
+  box-sizing: border-box; /* Убеждаемся, что padding не увеличивает ширину */
 }
 
 .exam-subjects::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
+  display: none;
 }
 
 .exam-section-title {
@@ -1178,12 +1179,19 @@ button.auth-secondary:hover {
 }
 
 .article-card {
-  background-color: #2b2b2b;
+  width: 100%; /* Устанавливаем 100% ширины относительно контейнера */
+  max-width: 400px; /* Ограничиваем максимальную ширину */
+  height: 180px; /* Оставляем фиксированную высоту */
   padding: 15px;
+  background-color: #2b2b2b;
   border-radius: 12px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  -webkit-tap-highlight-color: transparent;
+  animation: fadeInUp 0.5s ease forwards;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box; /* Убеждаемся, что padding входит в ширину */
 }
 
 .article-card:hover {
@@ -1356,23 +1364,27 @@ button.auth-secondary:hover {
 /* Адаптивные стили */
 @media (max-width: 480px) {
   .exam-subjects {
-      max-height: calc(100vh - 130px);
-      padding-bottom: 60px;
-      gap: 25px;
+    padding: 0 5px; /* Уменьшаем боковые отступы для мобильных */
+    gap: 15px; /* Уменьшаем зазор между карточками */
+    max-height: calc(100vh - 130px);
+    padding-bottom: 60px;
   }
 
   .article-card {
-      padding: 10px;
+    width: 100%; /* Оставляем 100% ширины */
+    max-width: none; /* Убираем ограничение максимальной ширины */
+    height: 150px; /* Уменьшаем высоту для мобильных */
+    padding: 10px; /* Уменьшаем внутренние отступы */
   }
 
   .article-card-title {
-      font-size: 16px;
-      margin-bottom: 6px;
+    font-size: 16px;
+    margin-bottom: 6px;
   }
 
   .article-card-subtitle {
-      font-size: 14px;
-      margin-top: 6px;
+    font-size: 12px;
+    margin-top: 6px;
   }
 
   .task-modal-content {
