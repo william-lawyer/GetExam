@@ -69,26 +69,26 @@
             <div class="stories-preview" id="storiesPreview"></div>
             <div class="greeting-text">Привет!</div>
             <div class="main-question">Что будем учить?</div>
-            <input type="text" class="search-input" id="mainSearch" placeholder="Поиск...">
+            <input type="text" class="search-input" id="mainSearch" placeholder="Поиск..." oninput="openSearchScreen()">
             <div class="subjects-container">
-                <button class="subject-btn">Обществознание</button>
-                <button class="subject-btn">Биология</button>
-                <button class="subject-btn">Математика</button>
-                <button class="subject-btn">Русский язык</button>
-                <button class="subject-btn">История</button>
-                <button class="subject-btn">Химия</button>
-                <button class="subject-btn">Физика</button>
-                <button class="subject-btn">Английский язык</button>
-                <button class="subject-btn">Информатика</button>
-                <button class="subject-btn">География</button>
-                <button class="subject-btn">Литература</button>
+                <button class="subject-btn" data-subject="Обществознание" onclick="goToTheory('Обществознание')">Обществознание</button>
+                <button class="subject-btn" data-subject="Биология" onclick="goToTheory('Биология')">Биология</button>
+                <button class="subject-btn" data-subject="Математика" onclick="goToTheory('Математика')">Математика</button>
+                <button class="subject-btn" data-subject="Русский язык" onclick="goToTheory('Русский язык')">Русский язык</button>
+                <button class="subject-btn" data-subject="История" onclick="goToTheory('История')">История</button>
+                <button class="subject-btn" data-subject="Химия" onclick="goToTheory('Химия')">Химия</button>
+                <button class="subject-btn" data-subject="Физика" onclick="goToTheory('Физика')">Физика</button>
+                <button class="subject-btn" data-subject="Английский язык" onclick="goToTheory('Английский язык')">Английский язык</button>
+                <button class="subject-btn" data-subject="Информатика" onclick="goToTheory('Информатика')">Информатика</button>
+                <button class="subject-btn" data-subject="География" onclick="goToTheory('География')">География</button>
+                <button class="subject-btn" data-subject="Литература" onclick="goToTheory('Литература')">Литература</button>
             </div>
             <div class="ad-banner">
                 <img src="QtrEJ6z.png" alt="Реклама" class="ad-image">
             </div>
             <div class="articles-module">
-                <div class="articles-title">Подборка статей</div>
-                <div class="articles-subtitle">Специальные подборки которые упростят вам обучение</div>
+                <div class="articles-title">Подборка предметов</div>
+                <div class="articles-subtitle">Выберите предмет для изучения</div>
                 <div class="class-buttons">
                     <button class="class-btn active" data-class="11">11 класс</button>
                     <button class="class-btn" data-class="10">10 класс</button>
@@ -109,12 +109,51 @@
             <div class="exam-subjects" id="examSubjects"></div>
         </div>
 
+        <!-- Вкладка "Теория" -->
+        <div class="learning-module" id="theory-page" style="display: none;">
+            <div class="theory-title">Теория</div>
+            <input type="text" class="search-input" id="theorySearch" placeholder="Поиск..." oninput="updateTheoryCards()">
+            <div class="theory-filters">
+                <select id="subjectFilter" onchange="updateTheoryCards()">
+                    <option value="">Все предметы</option>
+                    <option value="Математика">Математика</option>
+                    <option value="Физика">Физика</option>
+                    <option value="Биология">Биология</option>
+                    <option value="Обществознание">Обществознание</option>
+                    <option value="Русский язык">Русский язык</option>
+                    <option value="История">История</option>
+                    <option value="Химия">Химия</option>
+                    <option value="Английский язык">Английский язык</option>
+                    <option value="Информатика">Информатика</option>
+                    <option value="География">География</option>
+                    <option value="Литература">Литература</option>
+                </select>
+                <select id="classFilter" onchange="updateTheoryCards()">
+                    <option value="">Все классы</option>
+                    <option value="9">9 класс</option>
+                    <option value="10">10 класс</option>
+                    <option value="11">11 класс</option>
+                </select>
+            </div>
+            <div class="theory-cards" id="theoryCards"></div>
+        </div>
+
+        <!-- Экран полной теории -->
+        <div class="theory-full-screen" id="theoryFullScreen" style="display: none;">
+            <div class="theory-full-content">
+                <button class="back-theory-btn" onclick="closeTheoryFull()">Назад</button>
+                <div class="theory-full-title" id="theoryFullTitle"></div>
+                <div class="theory-full-text" id="theoryFullText"></div>
+            </div>
+        </div>
+
+        <!-- Экран поиска -->
         <div class="search-screen" id="searchScreen" style="display: none;">
             <div class="search-header">
-                <input type="text" class="search-input" id="searchInput" placeholder="Поиск...">
-                <button class="cancel-btn" id="cancelSearch">Отмена</button>
+                <input type="text" class="search-input" id="searchInput" placeholder="Поиск..." oninput="updateSearchResults()">
+                <button class="cancel-btn" id="cancelSearch" onclick="closeSearchScreen()">Отмена</button>
             </div>
-            <div class="search-results" id="searchResults"></div>
+            <div class="theory-cards" id="searchResults"></div>
         </div>
 
         <!-- Всплывающее окно для выбора заданий -->
@@ -141,6 +180,12 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
                 <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+            </svg>
+        </button>
+        <button class="nav-btn" onclick="switchPage('theory-page')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
             </svg>
         </button>
     </footer>
