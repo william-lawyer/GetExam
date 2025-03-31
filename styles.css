@@ -976,7 +976,7 @@ button.auth-secondary:hover {
   }
 
   .close-btn {
-    top: 15px; /* Небольшая корректировка для мобильных */
+    top: 140px; /* Небольшая корректировка для мобильных */
     margin-right: 12px;
     font-size: 20px; /* Уменьшаем размер для мобильных */
     width: 28px; /* Уменьшаем размер кнопки */
@@ -1072,5 +1072,739 @@ button.auth-secondary:hover {
     max-height: 130px;
     margin-left: -5px;
     margin-top: 20px;
+  }
+}
+
+/* Существующие стили остаются без изменений до конца файла, добавляем новые стили в конец */
+
+/* Стили для нижней панели навигации */
+.nav-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #2b2b2b;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  z-index: 10;
+}
+
+.nav-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  -webkit-tap-highlight-color: transparent; /* Убирает синее выделение */
+}
+
+.nav-btn.active {
+  color: #ffd700;
+  font-weight: bold;
+}
+
+.nav-btn:hover {
+  color: #ccc;
+}
+
+/* Стили для страницы пробных вариантов */
+/* ... (весь код до стилей страницы пробных вариантов остаётся без изменений) ... */
+
+.practice-title {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 25px;
+  color: #fff;
+  animation: fadeInUp 0.5s ease forwards;
+  width: 100%;
+}
+
+.exam-buttons {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.exam-btn {
+  padding: 12px 22px;
+  font-size: 18px;
+  background-color: #2b2b2b;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  animation: scaleIn 0.4s ease forwards;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.exam-btn.active {
+  background-color: #fff;
+  color: #000;
+}
+
+.exam-btn:hover:not(.active) {
+  background-color: #444;
+}
+
+/* ... (весь код до стилей страницы пробных вариантов остаётся без изменений) ... */
+
+.exam-subjects {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px; /* Увеличено с 20px до 30px для большего расстояния между карточками */
+  padding-bottom: 80px;
+  max-height: calc(100vh - 150px);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  /* Скрытие скроллбара */
+  -ms-overflow-style: none; /* IE и Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.exam-subjects::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.exam-section-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.article-card {
+  background-color: #2b2b2b;
+  padding: 15px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.article-card:hover {
+  background-color: #3a3a3a;
+}
+
+.article-card-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 8px; /* Увеличено с 4px до 8px */
+  line-height: 1.2;
+}
+
+.article-card-subtitle {
+  font-size: 14px;
+  color: #ccc;
+  margin-top: 8px; /* Увеличено с 4px до 8px */
+  line-height: 1.2;
+}
+
+/* Стили для всплывающего окна */
+.task-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 20;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.task-modal-content {
+  background-color: #2b2b2b;
+  padding: 20px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+  animation: scaleIn 0.4s ease forwards;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.close-modal-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: #fff;
+  font-size: 24px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.3s ease;
+}
+
+.close-modal-btn:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.task-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.task-buttons {
+  width: 100%;
+}
+
+.task-modal-layout {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+}
+
+.task-numbers {
+  display: flex;
+  flex-wrap: wrap; /* Добавляем перенос элементов */
+  gap: 10px;
+  width: 100px; /* Увеличиваем ширину контейнера */
+  max-height: 300px; /* Ограничиваем максимальную высоту */
+  overflow-y: auto; /* Добавляем прокрутку при необходимости */
+  -webkit-overflow-scrolling: touch;
+}
+
+.task-btn {
+  width: 40px; /* Фиксированная ширина */
+  height: 40px; /* Фиксированная высота */
+  min-width: 40px; /* Минимальная ширина */
+  min-height: 40px; /* Минимальная высота */
+  background-color: #444;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+  display: flex; /* Для центрирования текста */
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0; /* Предотвращаем сжатие кнопок */
+}
+.task-btn:hover {
+  background-color: #666;
+}
+
+.generate-btn-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.generate-variant-btn {
+  width: 100%;
+  max-width: 300px;
+  padding: 15px;
+  background-color: #ffd700;
+  color: #000;
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.generate-variant-btn:hover {
+  background-color: #ffea00;
+}
+
+.start-variant-btn {
+  width: 90%;
+  max-width: 300px;
+  padding: 15px;
+  background-color: #ffd700;
+  color: #000;
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+}
+
+.start-variant-btn:hover {
+  background-color: #ffea00;
+}
+
+/* Адаптивные стили */
+@media (max-width: 480px) {
+  .exam-subjects {
+      max-height: calc(100vh - 130px);
+      padding-bottom: 60px;
+      gap: 25px;
+  }
+
+  .article-card {
+      padding: 10px;
+  }
+
+  .article-card-title {
+      font-size: 16px;
+      margin-bottom: 6px;
+  }
+
+  .article-card-subtitle {
+      font-size: 14px;
+      margin-top: 6px;
+  }
+
+  .task-modal-content {
+      width: 95%;
+      padding: 15px;
+  }
+
+  .task-title {
+      font-size: 20px;
+  }
+
+  .task-btn {
+    width: 35px; /* Чуть меньше для мобильных */
+    height: 35px;
+    min-width: 35px;
+    min-height: 35px;
+    font-size: 14px;
+  }
+
+  .task-modal-layout {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .task-numbers {
+    flex-direction: row; /* Оставляем горизонтальное расположение */
+    flex-wrap: wrap; /* Обеспечиваем перенос */
+    width: 100%; /* Полная ширина на мобильных */
+    max-height: 200px; /* Уменьшаем высоту для мобильных */
+    padding: 10px 0;
+  }
+}
+
+/* ... (весь код до стилей экрана задания остаётся без изменений) ... */
+
+.task-info-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #1a1a1a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 30;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.task-info-content {
+  width: 90%;
+  max-width: 800px;
+  padding: 20px;
+  padding-top: 80px;
+  color: #fff;
+}
+
+.task-info-title {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.task-info-meta {
+  font-size: 18px;
+  color: #ccc;
+  margin-bottom: 25px;
+}
+
+.task-info-theory {
+  padding: 15px 0;
+  border-radius: 12px;
+  margin-bottom: 80px;
+}
+
+.task-info-theory h3 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.task-info-theory p {
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.start-task-btn {
+  position: fixed;
+  bottom: 20px;
+  width: 90%;
+  max-width: 300px;
+  padding: 15px;
+  background-color: #ffd700;
+  color: #000;
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.start-task-btn:hover {
+  background-color: #ffea00;
+}
+
+.back-task-info-btn {
+  position: absolute;
+  top: 70px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Адаптивные стили */
+@media (max-width: 480px) {
+  .task-info-content {
+      padding-top: 60px;
+  }
+
+  .task-info-title {
+      font-size: 28px;
+  }
+
+  .task-info-meta {
+      font-size: 16px;
+  }
+
+  .task-info-theory h3 {
+      font-size: 20px;
+  }
+
+  .task-info-theory p {
+      font-size: 16px;
+  }
+
+  .start-task-btn {
+      width: 80%;
+      padding: 12px;
+      font-size: 16px;
+  }
+
+  .back-task-info-btn {
+      top: 50px;
+      right: 15px;
+      font-size: 16px;
+  }
+}
+
+/* ... (весь код до стилей экрана выполнения задания остаётся без изменений) ... */
+
+.task-execution-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #1a1a1a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 40;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.task-execution-content {
+  width: 90%;
+  max-width: 800px;
+  padding: 20px;
+  padding-top: 80px;
+  color: #fff;
+}
+
+.task-execution-title {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.task-layout {
+  display: flex;
+  gap: 20px;
+}
+
+.task-navigation {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-self: flex-start; /* Выравнивание слева */
+}
+
+.task-nav-btn {
+  width: 40px;
+  height: 40px;
+  background-color: #444;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.task-nav-btn:hover:not(.active) {
+  background-color: #666;
+}
+
+.task-nav-btn.active {
+  background-color: #ffd700;
+  color: #000;
+}
+
+.task-content {
+  flex: 1;
+}
+
+.task-execution-text {
+  font-size: 18px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.task-answer-input {
+  width: 100%;
+  max-width: 400px;
+  padding: 12px;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  background-color: #2b2b2b;
+  color: #fff;
+}
+
+.save-answer-btn {
+  width: 100%;
+  max-width: 400px;
+  padding: 12px;
+  background-color: #ffd700;
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 15px 0;
+}
+
+.save-answer-btn:hover {
+  background-color: #ffea00;
+}
+
+.finish-exam-btn {
+  width: 100%;
+  max-width: 400px;
+  padding: 12px;
+  background-color: #ffd700;
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.finish-exam-btn:hover {
+  background-color: #ffea00;
+}
+
+.back-task-execution-btn {
+  position: absolute;
+  top: 70px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Стили для модального окна результата */
+.result-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.result-modal-content {
+  background-color: #2b2b2b;
+  padding: 20px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  color: #fff;
+}
+
+.result-modal-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #fff;
+}
+
+.result-modal-correct {
+  font-size: 16px;
+  color: #ccc;
+  margin-bottom: 20px;
+}
+
+.result-modal-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.result-modal-btn {
+  padding: 10px 20px;
+  background-color: #444;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.result-modal-btn:hover {
+  background-color: #666;
+}
+
+.result-details {
+  max-height: 50vh;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+
+.result-item {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.result-item p {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+/* Адаптивные стили */
+@media (max-width: 480px) {
+  .task-execution-content {
+      padding-top: 60px;
+  }
+
+  .task-layout {
+      flex-direction: column;
+  }
+
+  .task-navigation {
+      width: 100%;
+      justify-content: flex-start; /* Слева на мобильных */
+  }
+
+  .task-execution-title {
+      font-size: 28px;
+  }
+
+  .task-execution-text {
+      font-size: 16px;
+  }
+
+  .task-answer-input {
+      max-width: 100%;
+      font-size: 16px;
+      padding: 10px;
+  }
+
+  .save-answer-btn {
+      max-width: 100%;
+      font-size: 16px;
+      padding: 10px;
+  }
+
+  .finish-exam-btn {
+      max-width: 100%;
+      font-size: 16px;
+      padding: 10px;
+  }
+
+  .back-task-execution-btn {
+      top: 50px;
+      right: 15px;
+      font-size: 16px;
+  }
+
+  .result-modal-content {
+      padding: 15px;
+      width: 95%;
+  }
+
+  .result-modal-title {
+      font-size: 20px;
+  }
+
+  .result-modal-correct {
+      font-size: 14px;
+  }
+
+  .result-modal-btn {
+      font-size: 14px;
+      padding: 8px 16px;
   }
 }
