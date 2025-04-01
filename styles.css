@@ -1013,7 +1013,7 @@ button.auth-secondary:hover {
 
   .close-btn {
     top: 140px; /* Небольшая корректировка для мобильных */
-    margin-right: 12px;
+    margin-right: 15px;
     font-size: 20px; /* Уменьшаем размер для мобильных */
     width: 28px; /* Уменьшаем размер кнопки */
     height: 28px;
@@ -1717,8 +1717,8 @@ button.auth-secondary:hover {
 
 .back-task-execution-btn {
   position: absolute;
-  top: 115px; /* Опускаем ниже с 110px до 115px */
-  right: 30px; /* Отодвигаем от правого края с 20px до 30px */
+  top: 103px;
+  right: 46px;
   background: none;
   border: none;
   color: #fff;
@@ -1845,9 +1845,9 @@ button.auth-secondary:hover {
       padding: 10px;
   }
 
-  .back-task-execution-btn {
-    top: 95px; /* Опускаем ниже с 90px до 95px */
-    right: 25px; /* Отодвигаем с 15px до 25px */
+  .back-task-info-btn {
+    top: 106px;
+    right: 47px;
     font-size: 16px;
   }
 
@@ -1880,18 +1880,49 @@ button.auth-secondary:hover {
   width: 100%;
 }
 
+.theory-filters {
+  width: 100%;
+  display: flex;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.theory-filters select {
+  flex: 1;
+  padding: 12px;
+  background-color: #2b2b2b;
+  color: #fff;
+  border: 2px solid #444;
+  border-radius: 12px;
+  font-size: 18px;
+  cursor: pointer;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  transition: border-color 0.3s ease;
+}
+
+.theory-filters select:hover {
+  border-color: #666;
+}
+
+.theory-filters select option {
+  background-color: #2b2b2b;
+  color: #fff;
+}
+
 .theory-cards {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding-bottom: 90px; /* Учитываем высоту nav-footer */
+  padding-bottom: 90px;
 }
 
 .theory-card {
   width: 100%;
-  max-width: 400px;
-  height: 90px;
+  height: 100px;
   padding: 15px;
   background-color: #2b2b2b;
   border-radius: 12px;
@@ -1906,7 +1937,7 @@ button.auth-secondary:hover {
 }
 
 .theory-card:hover {
-  background-color: #3a3a3a;
+  background-color: #444;
 }
 
 .theory-card-title {
@@ -1935,63 +1966,106 @@ button.auth-secondary:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #1a1a1a;
+  background-color: #000;
   display: flex;
   flex-direction: column;
   align-items: center;
   z-index: 30;
   opacity: 0;
-  transition: opacity 0.15s ease;
+  transition: opacity 0.3s ease;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+}
+
+.theory-full-screen.open {
+  opacity: 1;
 }
 
 .theory-full-content {
   width: 90%;
   max-width: 800px;
-  padding: 20px;
+  padding: 30px;
   padding-top: 120px;
   color: #fff;
+  box-sizing: border-box;
+}
+
+.back-theory-btn {
+  position: fixed;
+  top: 120px; /* Ваш стиль */
+  right: 30px; /* Размещаем справа с отступом 30px */
+  padding: 8px 16px; /* Ваш стиль */
+  font-size: 16px; /* Ваш стиль */
+  border-radius: 10px; /* Ваш стиль */
+  background-color: #2b2b2b;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+  z-index: 31;
+}
+
+.back-theory-btn:hover {
+  background-color: #444;
 }
 
 .theory-full-title {
-  font-size: 32px;
+  font-size: 36px;
   font-weight: bold;
-  margin-bottom: 15px;
+  margin-bottom: 25px;
   text-align: left;
+  animation: fadeInUp 0.5s ease forwards;
 }
 
 .theory-full-text {
   font-size: 18px;
-  line-height: 1.5;
+  line-height: 1.6;
+  color: #fff;
+  opacity: 1;
 }
 
-.back-theory-btn {
-  position: absolute;
-  top: 115px;
-  right: 30px;
-  background: none;
-  border: none;
+.theory-full-text p {
+  margin-bottom: 20px;
   color: #fff;
-  font-size: 18px;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
+}
+
+.theory-full-text img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 25px auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  opacity: 1;
 }
 
 /* Адаптивные стили */
 @media (max-width: 480px) {
   .theory-title {
     font-size: 28px;
+    margin-bottom: 20px;
+  }
+
+  .theory-filters {
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .theory-filters select {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 10px;
+  }
+
+  .theory-cards {
+    padding-bottom: 80px;
   }
 
   .theory-card {
-    height: 80px;
-    padding: 10px;
-  }
-
-  .theory-card {
-    height: 80px; /* Уменьшено с 100px */
-    padding: 10px;
+    height: 90px;
+    padding: 12px;
   }
 
   .theory-card-title {
@@ -2005,48 +2079,31 @@ button.auth-secondary:hover {
   }
 
   .theory-full-content {
+    padding: 20px;
     padding-top: 100px;
   }
 
+  .back-theory-btn {
+    top: 61px;
+    right: 47px;
+    padding: 8px 16px;
+    font-size: 16px;
+    border-radius: 10px;
+}
+
+}
+
   .theory-full-title {
     font-size: 28px;
+    margin-bottom: 20px;
   }
 
   .theory-full-text {
     font-size: 16px;
+    line-height: 1.5;
   }
 
-  .back-theory-btn {
-    top: 95px;
-    right: 25px;
-    font-size: 16px;
+  .theory-full-text img {
+    margin: 20px auto;
+    border-radius: 10px;
   }
-}
-
-.theory-filters {
-  width: 100%;
-  max-width: 400px;
-  display: flex;
-  gap: 15px;
-  margin: 15px 0;
-}
-
-.theory-filters select {
-  flex: 1;
-  padding: 10px;
-  background-color: #2b2b2b;
-  color: #fff;
-  border: 1px solid #444;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
-  outline: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
-
-.theory-filters select option {
-  background-color: #2b2b2b;
-  color: #fff;
-}
