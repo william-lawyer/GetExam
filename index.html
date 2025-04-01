@@ -15,7 +15,6 @@
     </div>
 
     <div class="auth-container" id="auth-container" style="display: none;">
-        <!-- Экран входа -->
         <div id="auth-login-screen" class="auth-screen">
             <div class="auth-input-group">
                 <input type="text" id="login-username" placeholder="Логин">
@@ -29,7 +28,6 @@
             <button class="auth-secondary" onclick="showRegister()">Регистрация</button>
         </div>
 
-        <!-- Экран регистрации -->
         <div id="auth-register-screen" class="auth-screen">
             <div class="auth-input-group">
                 <input type="text" id="reg-name" placeholder="Имя">
@@ -51,7 +49,6 @@
             <button class="auth-secondary auth-back-btn" onclick="goBack('login')">Назад</button>
         </div>
 
-        <!-- Экран ввода кода -->
         <div id="auth-code-screen" class="auth-screen">
             <p>Мы отправили код на вашу почту</p>
             <div class="auth-input-group">
@@ -64,7 +61,6 @@
     </div>
 
     <div id="app" style="display: none;">
-        <!-- Главная страница -->
         <div class="learning-module" id="main-page">
             <div class="stories-preview" id="storiesPreview"></div>
             <div class="greeting-text">Привет!</div>
@@ -99,7 +95,6 @@
             </div>
         </div>
 
-        <!-- Страница пробных вариантов -->
         <div class="learning-module" id="practice-page" style="display: none;">
             <div class="practice-title">Задания</div>
             <div class="exam-buttons">
@@ -109,7 +104,6 @@
             <div class="exam-subjects" id="examSubjects"></div>
         </div>
 
-        <!-- Вкладка "Теория" -->
         <div class="learning-module" id="theory-page" style="display: none;">
             <div class="theory-title">Теория</div>
             <input type="text" class="search-input" id="theorySearch" placeholder="Поиск..." oninput="updateTheoryCards()">
@@ -138,7 +132,6 @@
             <div class="theory-cards" id="theoryCards"></div>
         </div>
 
-        <!-- Экран полной теории -->
         <div class="theory-full-screen" id="theoryFullScreen" style="display: none;">
             <div class="theory-full-content">
                 <button class="back-theory-btn" onclick="closeTheoryFull()">Назад</button>
@@ -147,7 +140,6 @@
             </div>
         </div>
 
-        <!-- Экран поиска -->
         <div class="search-screen" id="searchScreen" style="display: none;">
             <div class="search-header">
                 <input type="text" class="search-input" id="searchInput" placeholder="Поиск..." oninput="updateSearchResults()">
@@ -156,7 +148,6 @@
             <div class="theory-cards" id="searchResults"></div>
         </div>
 
-        <!-- Всплывающее окно для выбора заданий -->
         <div class="task-modal" id="taskModal" style="display: none;">
             <div class="task-modal-content">
                 <button class="close-modal-btn" onclick="closeTaskModal()">×</button>
@@ -168,7 +159,6 @@
 
     <div class="stories-container" id="storiesContainer" style="display: none;"></div>
 
-    <!-- Нижняя панель навигации с иконками -->
     <footer class="nav-footer" id="navFooter">
         <button class="nav-btn active" onclick="switchPage('main-page')">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
