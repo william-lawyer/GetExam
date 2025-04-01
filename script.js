@@ -1132,41 +1132,40 @@ function showVariantTheory(examType, subject, taskCount) {
     };
 }
 
-// Глобальные переменные
 let theoryData = [];
 let currentPage = 'main-page';
 
-// Загрузка данных теории
 fetch('theory.json')
-  .then(response => response.json())
+  .then(response => {
+    if (!response.ok) throw new Error('Ошибка загрузки theory.json');
+    return response.json();
+  })
   .then(data => {
     theoryData = data;
-    updateTheoryCards();
-    updateArticlesCards();
+    console.log('Данные загружены:', theoryData);
+    updateTheoryCards(); // Предполагается, что эта функция есть
   })
   .catch(error => console.error('Ошибка загрузки теории:', error));
 
-// Переключение страниц
 function switchPage(pageId) {
-    const pages = ['main-page', 'practice-page', 'theory-page'];
-    pages.forEach(id => {
-      const page = document.getElementById(id);
-      page.style.display = id === pageId ? 'flex' : 'none';
-    });
-    document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
-    document.querySelector(`.nav-btn[onclick="switchPage('${pageId}')"]`).classList.add('active');
-    currentPage = pageId;
-  
-    if (pageId === 'theory-page') {
-      updateTheoryCards();
-    } else if (pageId === 'main-page') {
-      updateArticlesCards();
-      document.getElementById('searchScreen').style.display = 'none'; // Закрываем экран поиска
-      document.getElementById('mainSearch').value = ''; // Очищаем поиск
-    }
-  }
+  const pages = ['main-page', 'practice-page', 'theory-page'];
+  pages.forEach(id => {
+    const page = document.getElementById(id);
+    page.style.display = id === pageId ? 'flex' : 'none';
+  });
+  document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+  document.querySelector(`.nav-btn[onclick="switchPage('${pageId}')"]`).classList.add('active');
+  currentPage = pageId;
 
-// Переход на вкладку "Теория" с фильтром по предмету
+  if (pageId === 'theory-page') {
+    updateTheoryCards();
+  } else if (pageId === 'main-page') {
+    updateArticlesCards();
+    document.getElementById('searchScreen').style.display = 'none';
+    document.getElementById('mainSearch').value = '';
+  }
+}
+
 function goToTheory(subject) {
   document.getElementById('subjectFilter').value = subject;
   document.getElementById('classFilter').value = '';
@@ -1174,62 +1173,114 @@ function goToTheory(subject) {
   switchPage('theory-page');
 }
 
-// Обновление карточек теории (для #theoryCards)
 function updateTheoryCards() {
-  const container = document.getElementById('theoryCards');
-  if (!container) return;
-  container.innerHTML = '';
-
-  let filteredTheory = theoryData;
-  const subjectFilter = document.getElementById('subjectFilter').value;
-  const classFilter = document.getElementById('classFilter').value;
-  const searchQuery = document.getElementById('theorySearch').value.trim().toLowerCase();
-
-  if (subjectFilter) {
-    filteredTheory = filteredTheory.filter(item => item.subject === subjectFilter);
+    const container = document.getElementById('theoryCards');
+    if (!container) return;
+    container.innerHTML = '';
+  
+    theoryData.forEach(item => {
+      const card = document.createElement('div');
+      card.classList.add('theory-card');
+      card.onclick = () => showTheoryFull(item.id);
+  
+      const title = document.createElement('div');
+      title.classList.add('theory-card-title');
+      title.textContent = item.title;
+  
+      const desc = document.createElement('div');
+      desc.classList.add('theory-card-desc');
+      desc.textContent = item.description;
+  
+      card.appendChild(title);
+      card.appendChild(desc);
+      container.appendChild(card);
+    });
   }
-  if (classFilter) {
-    filteredTheory = filteredTheory.filter(item => item.class === classFilter);
+
+  function showTheoryFull(id) {
+    const theory = theoryData.find(item => item.id === id);
+    if (!theory) {
+      console.error(`Теория с ID ${id} не найдена`);
+      return;
+    }
+  
+    const screen = document.getElementById('theoryFullScreen');
+    const title = document.getElementById('theoryFullTitle');
+    const textContainer = document.getElementById('theoryFullText');
+  
+    title.textContent = theory.title;
+    textContainer.innerHTML = '';
+  
+    if (theory.content && Array.isArray(theory.content)) {
+      theory.content.forEach(part => {
+        if (part.type === 'text') {
+          const p = document.createElement('p');
+          p.textContent = part.value;
+          textContainer.appendChild(p);
+        } else if (part.type === 'image') {
+          const img = document.createElement('img');
+          let src = part.value;
+          if (src.includes('imgur.com')) {
+            if (!src.endsWith('.png') && !src.endsWith('.jpg') && !src.endsWith('.jpeg')) {
+              src = src.replace('imgur.com', 'i.imgur.com') + '.png';
+            }
+          }
+          img.src = src;
+          img.alt = part.alt || 'Изображение теории';
+          img.onerror = () => {
+            img.alt = 'Не удалось загрузить изображение';
+            console.error(`Ошибка загрузки изображения: ${src}`);
+          };
+          textContainer.appendChild(img);
+        }
+      });
+    } else if (theory.fullText) {
+      const p = document.createElement('p');
+      p.textContent = theory.fullText;
+      textContainer.appendChild(p);
+    } else {
+      console.error('Нет данных в поле content или fullText для отображения');
+      textContainer.textContent = 'Контент отсутствует';
+    }
+  
+    screen.style.display = 'flex';
+    setTimeout(() => { screen.style.opacity = '1'; }, 10);
   }
+
+  function closeTheoryFull() {
+    const screen = document.getElementById('theoryFullScreen');
+    if (screen) {
+      screen.style.opacity = '0';
+      setTimeout(() => { 
+        screen.style.display = 'none'; 
+        console.log('Экран теории закрыт');
+      }, 300);
+    } else {
+      console.error('Элемент #theoryFullScreen не найден');
+    }
+  }
+
+function openSearchScreen() {
+  const searchQuery = document.getElementById('mainSearch').value.trim().toLowerCase();
+  const searchScreen = document.getElementById('searchScreen');
+  const searchInput = document.getElementById('searchInput');
+
   if (searchQuery) {
-    filteredTheory = filteredTheory.filter(item => item.title.toLowerCase().includes(searchQuery));
+    searchScreen.style.display = 'flex';
+    setTimeout(() => { searchScreen.style.opacity = '1'; }, 10);
+    searchInput.value = searchQuery;
+    updateSearchResults();
+  } else {
+    searchScreen.style.display = 'none';
   }
-
-  filteredTheory.forEach(item => {
-    const card = document.createElement('div');
-    card.classList.add('theory-card');
-    card.onclick = () => showTheoryFull(item.id);
-
-    const title = document.createElement('div');
-    title.classList.add('theory-card-title');
-    title.textContent = item.title;
-
-    const desc = document.createElement('div');
-    desc.classList.add('theory-card-desc');
-    desc.textContent = item.description;
-
-    card.appendChild(title);
-    card.appendChild(desc);
-    container.appendChild(card);
-  });
 }
 
-// Поиск на главной странице (для #mainTheoryCards)
-function searchMainPage() {
-  const searchQuery = document.getElementById('mainSearch').value.trim().toLowerCase();
-  const mainTheoryCards = document.getElementById('mainTheoryCards');
-  const articlesModule = document.querySelector('.articles-module');
-  const subjectsContainer = document.querySelector('.subjects-container');
-  const adBanner = document.querySelector('.ad-banner');
-
-  mainTheoryCards.innerHTML = '';
+function updateSearchResults() {
+  const searchQuery = document.getElementById('searchInput').value.trim().toLowerCase();
+  const searchResults = document.getElementById('searchResults');
+  searchResults.innerHTML = '';
 
   if (searchQuery) {
-    articlesModule.style.display = 'none';
-    subjectsContainer.style.display = 'none';
-    adBanner.style.display = 'none';
-    mainTheoryCards.style.display = 'flex';
-
     const filteredTheory = theoryData.filter(item => item.title.toLowerCase().includes(searchQuery));
     filteredTheory.forEach(item => {
       const card = document.createElement('div');
@@ -1246,43 +1297,20 @@ function searchMainPage() {
 
       card.appendChild(title);
       card.appendChild(desc);
-      mainTheoryCards.appendChild(card);
+      searchResults.appendChild(card);
     });
-  } else {
-    articlesModule.style.display = 'block';
-    subjectsContainer.style.display = 'flex';
-    adBanner.style.display = 'block';
-    mainTheoryCards.style.display = 'none';
   }
 }
 
-// Показ полного текста теории
-function showTheoryFull(id) {
-  const theory = theoryData.find(item => item.id === id);
-  if (!theory) return;
-
-  const screen = document.getElementById('theoryFullScreen');
-  const title = document.getElementById('theoryFullTitle');
-  const text = document.getElementById('theoryFullText');
-
-  title.textContent = theory.title;
-  text.textContent = theory.fullText;
-
-  screen.style.display = 'flex';
-  setTimeout(() => { screen.style.opacity = '1'; }, 10);
+function closeSearchScreen() {
+  const searchScreen = document.getElementById('searchScreen');
+  searchScreen.style.opacity = '0';
+  setTimeout(() => { 
+    searchScreen.style.display = 'none'; 
+    document.getElementById('mainSearch').value = '';
+  }, 150);
 }
 
-// Закрытие экрана теории
-function closeTheoryFull() {
-  const screen = document.getElementById('theoryFullScreen');
-  screen.style.opacity = '0';
-  setTimeout(() => { screen.style.display = 'none'; }, 150);
-  if (currentPage === 'main-page') {
-    searchMainPage(); // Обновляем поиск после закрытия
-  }
-}
-
-// Обновление карточек предметов на главной странице
 function updateArticlesCards() {
   const container = document.getElementById('articlesCards');
   container.innerHTML = '';
@@ -1321,7 +1349,6 @@ function updateArticlesCards() {
   });
 }
 
-// Переключение активного класса
 document.querySelectorAll('.class-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.class-btn').forEach(b => b.classList.remove('active'));
@@ -1330,59 +1357,4 @@ document.querySelectorAll('.class-btn').forEach(btn => {
   });
 });
 
-// Открытие экрана поиска
-function openSearchScreen() {
-    const searchQuery = document.getElementById('mainSearch').value.trim().toLowerCase();
-    const searchScreen = document.getElementById('searchScreen');
-    const searchInput = document.getElementById('searchInput');
-  
-    if (searchQuery) {
-      searchScreen.style.display = 'flex';
-      setTimeout(() => { searchScreen.style.opacity = '1'; }, 10);
-      searchInput.value = searchQuery;
-      updateSearchResults();
-    } else {
-      searchScreen.style.display = 'none';
-    }
-  }
-
-  function updateSearchResults() {
-    const searchQuery = document.getElementById('searchInput').value.trim().toLowerCase();
-    const searchResults = document.getElementById('searchResults');
-    searchResults.innerHTML = '';
-  
-    if (searchQuery) {
-      const filteredTheory = theoryData.filter(item => item.title.toLowerCase().includes(searchQuery));
-      filteredTheory.forEach(item => {
-        const card = document.createElement('div');
-        card.classList.add('theory-card');
-        card.onclick = () => showTheoryFull(item.id);
-  
-        const title = document.createElement('div');
-        title.classList.add('theory-card-title');
-        title.textContent = item.title;
-  
-        const desc = document.createElement('div');
-        desc.classList.add('theory-card-desc');
-        desc.textContent = item.description;
-  
-        card.appendChild(title);
-        card.appendChild(desc);
-        searchResults.appendChild(card);
-      });
-    }
-  }
-
-  // Закрытие экрана поиска
-function closeSearchScreen() {
-    const searchScreen = document.getElementById('searchScreen');
-    searchScreen.style.opacity = '0';
-    setTimeout(() => { 
-      searchScreen.style.display = 'none'; 
-      document.getElementById('mainSearch').value = ''; // Очищаем исходный поиск
-    }, 150);
-  }
-
-// Инициализация
 updateArticlesCards();
-
