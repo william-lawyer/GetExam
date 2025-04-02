@@ -1173,29 +1173,43 @@ function goToTheory(subject) {
   switchPage('theory-page');
 }
 
+// Замените функцию updateTheoryCards на эту версию
 function updateTheoryCards() {
     const container = document.getElementById('theoryCards');
     if (!container) return;
     container.innerHTML = '';
-  
-    theoryData.forEach(item => {
-      const card = document.createElement('div');
-      card.classList.add('theory-card');
-      card.onclick = () => showTheoryFull(item.id);
-  
-      const title = document.createElement('div');
-      title.classList.add('theory-card-title');
-      title.textContent = item.title;
-  
-      const desc = document.createElement('div');
-      desc.classList.add('theory-card-desc');
-      desc.textContent = item.description;
-  
-      card.appendChild(title);
-      card.appendChild(desc);
-      container.appendChild(card);
+    
+    const subjectFilter = document.getElementById('subjectFilter').value;
+    const classFilter = document.getElementById('classFilter').value;
+    
+    let filteredData = theoryData;
+    
+    if (subjectFilter) {
+        filteredData = filteredData.filter(item => item.subject === subjectFilter);
+    }
+    
+    if (classFilter) {
+        filteredData = filteredData.filter(item => item.class === classFilter);
+    }
+    
+    filteredData.forEach(item => {
+        const card = document.createElement('div');
+        card.classList.add('theory-card');
+        card.onclick = () => showTheoryFull(item.id);
+        
+        const title = document.createElement('div');
+        title.classList.add('theory-card-title');
+        title.textContent = item.title;
+        
+        const desc = document.createElement('div');
+        desc.classList.add('theory-card-desc');
+        desc.textContent = item.description;
+        
+        card.appendChild(title);
+        card.appendChild(desc);
+        container.appendChild(card);
     });
-  }
+}
 
   function showTheoryFull(id) {
     const theory = theoryData.find(item => item.id === id);
