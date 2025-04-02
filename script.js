@@ -112,8 +112,8 @@ const examSubjects = {
 };
 
 document.addEventListener("DOMContentLoaded", function() {
-    localStorage.clear();
-    console.log("LocalStorage cleared on page load");
+    // localStorage.clear(); // Закомментировано, чтобы отключить очищение
+    // console.log("LocalStorage cleared on page load"); // Можно убрать или оставить закомментированным
     navFooter.style.display = 'none'; // Скрываем футер при загрузке страницы
     video.addEventListener('loadedmetadata', function() {
         console.log("Video metadata loaded");
